@@ -32,13 +32,13 @@
             bindings = <&mo NAVIGATION>, <&mo NUMPAD>;
         };
 
-        // Press once for alt, twice for super.
-        alt_super_td: tap_dance_1 {
+        // Press once for symbol layer, twice for super.
+        sym_sup_td: tap_dance_1 {
             compatible = "zmk,behavior-tap-dance";
             label = "ALT_SUPER_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <200>;
-            bindings = <&kp LALT>, <&kp LGUI>;
+            bindings = <&sl SYMBOLS>, <&sk LGUI>;
         };
 
         // Backspace is backspace, Shift-Backspace is Delete.
@@ -111,21 +111,21 @@
 
         default_layer {
             // A tweaked Engram layout.
-            // -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            // | none  | none | none | BRI_DN | BRI_UP |                                                                          | MUTE  | VOL_DN | VOL_UP | none  | QWERTY TOG |
-            // | none  |  1   |  2   |   3    |   4    |    5     |                                                        |  6   |   7   |   8    |   9    |   0   |    none    |
-            // |  TAB  |  B   |  Y   |   O    |   U    |    ;     |                                                        |  .   |   L   |   D    |   W    |   V   |     Z      |
-            // |  ESC  |  C   |  I   |   E    |   A    |    '     |                                                        |  ,   |   H   |   T    |   S    |   N   |     Q      |
-            // | none  |  G   |  X   |   J    |   K    | BSPC/DEL | none  | none  | BSPC/DEL |  |  RET   |  none   | none  | RET  |   R   |   M    |   F    |   P   |    none    |
-            // | MAGIC | none | none |  none  |  none  |          | LSHFT | LCTRL | LALT/SUP |  | NP LAY | SYM LAY | SPACE |      |  DEL  |  none  |  none  | none  |    none    |
+            // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+            // | none  | none | none | BRI_DN | BRI_UP |                                                                       | MUTE | VOL_DN | VOL_UP | none  | QWERTY TOG |
+            // | none  |  1   |  2   |   3    |   4    |  5  |                                                           |  6  |  7   |   8    |   9    |   0   |    none    |
+            // |  TAB  |  B   |  Y   |   O    |   U    |  ;  |                                                           |  ,  |  L   |   D    |   W    |   V   |     Z      |
+            // |  ESC  |  C   |  I   |   E    |   A    |  '  |                                                           |  .  |  H   |   T    |   S    |   N   |     Q      |
+            // | none  |  G   |  X   |   J    |   K    |  \  |  LALT  | none  | none |  | none |    none     | BSPC/DEL  |  /  |  R   |   M    |   F    |   P   |    none    |
+            // | MAGIC | none | none |  none  | NP LAY |     |  LSHFT | LCTRL | none |  | none | SYM LAY/SUP | SPACE     |     | RET  |  none  |  none  | none  |    none    |
 
             bindings = <
-            &none          &none    &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                                  &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &tog QWERTY
-            &none          &kp N1   &kp N2  &kp N3        &kp N4        &kp N5                                                                                &kp N6    &kp N7      &kp N8        &kp N9        &kp N0  &none
-            &kp TAB        &kp B    &kp Y   &kp O         &kp U         &kp SEMI                                                                              &kp DOT   &kp L       &kp D         &kp W         &kp V   &kp Z
-            &kp ESC        &kp C    &kp I   &kp E         &kp A         &kp SQT                                                                               &kp COMMA &kp H       &kp T         &kp S         &kp N   &kp Q
-            &none          &kp G    &kp X   &kp J         &kp K         &bspc_del  &none      &none      &bspc_del       &kp RET      &none        &none      &kp RET   &kp R       &kp M         &kp F         &kp P   &none
-            &magic MAGIC 0 &none    &none   &none         &none                    &sk LSHFT  &sk LCTRL  &alt_super_td   &nav_pad_td  &sl SYMBOLS  &kp SPACE            &none       &none         &none         &none   &none
+            &none          &none    &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                    &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &tog QWERTY
+            &none          &kp N1   &kp N2  &kp N3        &kp N4        &kp N5                                                                 &kp N6     &kp N7      &kp N8        &kp N9        &kp N0  &none
+            &kp TAB        &kp B    &kp Y   &kp O         &kp U         &kp SEMI                                                               &kp COMMA  &kp L       &kp D         &kp W         &kp V   &kp Z
+            &kp ESC        &kp C    &kp I   &kp E         &kp A         &kp SQT                                                                &kp DOT    &kp H       &kp T         &kp S         &kp N   &kp Q
+            &none          &kp G    &kp X   &kp J         &kp K         &kp BSLH  &sk LALT   &none      &none   &none  &none        &bspc_del  &kp FSLH   &kp R       &kp M         &kp F         &kp P   &none
+            &magic MAGIC 0 &none    &none   &none         &nav_pad_td             &sk LSHFT  &sk LCTRL  &none   &none  &sym_sup_td  &kp SPACE             &kp RET     &none         &none         &none   &none
             >;
         };
 
@@ -133,7 +133,7 @@
             // ------------------------------------------------------------------------------------------------------------------------------------------------------
             // | trans | trans | trans | trans  | trans  |                                                                  | trans | trans | trans | trans | trans |
             // | trans | trans | trans | trans  | trans  | trans |                                                  | trans | trans | trans | trans | trans | trans |
-            // | trans |  Q    |  W    |   E    |   R    |   T   |                                                  |   Y   |   U   |   I   |   O   |   P   |   =   |
+            // | trans |  Q    |  W    |   E    |   R    |   T   |                                                  |   Y   |   U   |   I   |   O   |   P   |   -   |
             // | trans |  A    |  S    |   D    |   F    |   G   |                                                  |   H   |   J   |   K   |   L   |   ;   |   '   |
             // | trans |  Z    |  X    |   C    |   V    |   B   | trans | trans | trans |  | trans | trans | trans |   N   |   M   |   ,   |   .   |   /   | trans |
             // | trans | trans | trans | trans  | trans  |       | trans | trans | trans |  | trans | trans | trans |       | trans |   [   |   ]   |   \   | trans |
@@ -141,7 +141,7 @@
             bindings = <
             &trans  &trans  &trans  &trans  &trans                                                                    &trans  &trans     &trans    &trans    &trans
             &trans  &trans  &trans  &trans  &trans  &trans                                                    &trans  &trans  &trans     &trans    &trans    &trans
-            &trans  &kp Q   &kp W   &kp E   &kp R   &kp T                                                     &kp Y   &kp U   &kp I      &kp O     &kp P     &kp EQUAL
+            &trans  &kp Q   &kp W   &kp E   &kp R   &kp T                                                     &kp Y   &kp U   &kp I      &kp O     &kp P     &kp MINUS
             &trans  &kp A   &kp S   &kp D   &kp F   &kp G                                                     &kp H   &kp J   &kp K      &kp L     &kp SEMI  &kp SQT
             &trans  &kp Z   &kp X   &kp C   &kp V   &kp B   &trans  &trans  &trans   &trans  &trans  &trans   &kp N   &kp M   &kp COMMA  &kp DOT   &kp FSLH  &none
             &trans  &trans  &trans  &trans  &trans          &trans  &trans  &trans   &trans  &trans  &trans           &trans  &kp LBKT   &kp RBKT  &kp BSLH  &trans

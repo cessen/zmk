@@ -14,12 +14,13 @@
 #define HYPER LC(LS(LG(LALT)))
 
 // layers
-#define DEFAULT 0
-#define QWERTY 1
-#define SYMBOLS 2
+#define DEFAULT    0
+#define QWERTY     1
+#define SYMBOLS    2
 #define NAVIGATION 3
-#define NUMPAD 4
-#define MAGIC 5
+#define NUMPAD     4
+#define OS         5
+#define MAGIC      6
 
 / {
     behaviors {
@@ -28,17 +29,17 @@
             compatible = "zmk,behavior-tap-dance";
             label = "LAYER_TAP_DANCE";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <350>;
             bindings = <&mo NAVIGATION>, <&mo NUMPAD>;
         };
 
-        // Press once for symbol layer, twice for super.
-        sym_sup_td: tap_dance_1 {
+        // Press once for symbol layer, twice for os layer, and thrice for super.
+        sym_os_sup_td: tap_dance_1 {
             compatible = "zmk,behavior-tap-dance";
-            label = "ALT_SUPER_TAP_DANCE";
+            label = "SYMBOL_OS_SUPER_TAP_DANCE";
             #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&sl SYMBOLS>, <&sk LGUI>;
+            tapping-term-ms = <350>;
+            bindings = <&sl SYMBOLS>, <&sl OS>, <&sk LGUI>;
         };
 
         // Backspace is backspace, Shift-Backspace is Delete.
@@ -112,20 +113,20 @@
         default_layer {
             // A tweaked Engram layout.
             // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-            // | none  | none | none | BRI_DN | BRI_UP |                                                                       | MUTE | VOL_DN | VOL_UP | none  | QWERTY TOG |
-            // | none  |  1   |  2   |   3    |   4    |  5  |                                                           |  6  |  7   |   8    |   9    |   0   |    none    |
-            // |  TAB  |  B   |  Y   |   O    |   U    |  ;  |                                                           |  ,  |  L   |   D    |   W    |   V   |     Z      |
-            // |  ESC  |  C   |  I   |   E    |   A    |  '  |                                                           |  .  |  H   |   T    |   S    |   N   |     Q      |
-            // | none  |  G   |  X   |   J    |   K    |  \  |  LALT  | none  | none |  | none |    none     | BSPC/DEL  |  /  |  R   |   M    |   F    |   P   |    none    |
-            // | MAGIC | none | none |  none  | NP LAY |     |  LSHFT | LCTRL | none |  | none | SYM LAY/SUP | SPACE     |     | RET  |  none  |  none  | none  |    none    |
+            // | none  | none | none | BRI_DN | BRI_UP |                                                                   |   MUTE   | VOL_DN | VOL_UP | none  | QWERTY TOG |
+            // | none  |  1   |  2   |   3    |   4    |  5  |                                                       |  6  |    7     |   8    |   9    |   0   |    none    |
+            // |  TAB  |  B   |  Y   |   O    |   U    |  ;  |                                                       |  ,  |    L     |   D    |   W    |   V   |     Z      |
+            // |  ESC  |  C   |  I   |   E    |   A    |  '  |                                                       |  .  |    H     |   T    |   S    |   N   |     Q      |
+            // | none  |  G   |  X   |   J    |   K    |  \  |  LALT  | none  | none |  | none |    none    | RET    |  /  |    R     |   M    |   F    |   P   |    none    |
+            // | MAGIC | none | none |  none  | NP LAY |     |  LSHFT | LCTRL | none |  | none | SYM/OS/SUP | SPACE  |     | BSPC/DEL |  none  |  none  | none  |    none    |
 
             bindings = <
-            &none          &none    &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                    &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &tog QWERTY
-            &none          &kp N1   &kp N2  &kp N3        &kp N4        &kp N5                                                                 &kp N6     &kp N7      &kp N8        &kp N9        &kp N0  &none
-            &kp TAB        &kp B    &kp Y   &kp O         &kp U         &kp SEMI                                                               &kp COMMA  &kp L       &kp D         &kp W         &kp V   &kp Z
-            &kp ESC        &kp C    &kp I   &kp E         &kp A         &kp SQT                                                                &kp DOT    &kp H       &kp T         &kp S         &kp N   &kp Q
-            &none          &kp G    &kp X   &kp J         &kp K         &kp BSLH  &sk LALT   &none      &none   &none  &none        &bspc_del  &kp FSLH   &kp R       &kp M         &kp F         &kp P   &none
-            &magic MAGIC 0 &none    &none   &none         &nav_pad_td             &sk LSHFT  &sk LCTRL  &none   &none  &sym_sup_td  &kp SPACE             &kp RET     &none         &none         &none   &none
+            &none          &none    &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                       &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &tog QWERTY
+            &none          &kp N1   &kp N2  &kp N3        &kp N4        &kp N5                                                                    &kp N6     &kp N7      &kp N8        &kp N9        &kp N0  &none
+            &kp TAB        &kp B    &kp Y   &kp O         &kp U         &kp SEMI                                                                  &kp COMMA  &kp L       &kp D         &kp W         &kp V   &kp Z
+            &kp ESC        &kp C    &kp I   &kp E         &kp A         &kp SQT                                                                   &kp DOT    &kp H       &kp T         &kp S         &kp N   &kp Q
+            &none          &kp G    &kp X   &kp J         &kp K         &kp BSLH  &sk LALT   &none      &none   &none  &none           &kp RET    &kp FSLH   &kp R       &kp M         &kp F         &kp P   &none
+            &magic MAGIC 0 &none    &none   &none         &nav_pad_td             &sk LSHFT  &sk LCTRL  &none   &none  &sym_os_sup_td  &kp SPACE             &bspc_del   &none         &none         &none   &none
             >;
         };
 
@@ -149,21 +150,21 @@
         };
 
         symbols_layer {
-            // -------------------------------------------------------------------------------------------------------------------------------------------------
-            // | none | none | none | none | none |                                                                | Ins  | PrtScr | ScrLk | Pause | Caps Lock |
-            // | none | none | none | none | none | none |                                                  | none | none |  none  |  none | none  |   none    |
-            // | none | none |  @   |  #   |  $   |  %   |                                                  |  ^   |  &   |   |    |   ~   | none  |   none    |
-            // | none | none |  \   |  /   |  -   |  *   |                                                  |  =   |  _   |   !    |   ?   | none  |   none    |
-            // | none | none |  [   |  {   |  (   |  +   | trans | trans | trans |  | trans | trans | trans |  `   |  )   |   }    |   ]   | none  |   none    |
-            // | none | none | none | none | none |      | trans | trans | trans |  | trans | trans | trans |      | none |  none  |  none | none  |   none    |
+            // ----------------------------------------------------------------------------------------------------------------------------------------
+            // | none | none | none | none | none |                                                                | none | none | none | none | none |
+            // | none | none | none | none | none | none |                                                  | none | none | none | none | none | none |
+            // | none | none |  @   |  #   |  $   |  %   |                                                  |  ^   |  &   |  |   |  ~   | none | none |
+            // | none | none |  \   |  /   |  -   |  *   |                                                  |  =   |  _   |  !   |  ?   | none | none |
+            // | none | none |  [   |  {   |  (   |  +   | trans | trans | trans |  | trans | trans | trans |  `   |  )   |  }   |  ]   | none | none |
+            // | none | none | none | none | none |      | trans | trans | trans |  | trans | trans | trans |      | none | none | none | none | none |
 
             bindings = <
-            &none   &none  &none       &none         &none                                                                                   &kp INS        &kp PSCRN     &kp SLCK       &kp PAUSE_BREAK  &kp CAPS
-            &none   &none  &none       &none         &none       &none                                                           &none       &none          &none         &none          &none            &none
-            &none   &none  &kp LS(N2)  &kp LS(N3)    &kp LS(N4)  &kp LS(N5)                                                      &kp LS(N6)  &kp LS(N7)     &kp LS(BSLH)  &kp LS(GRAVE)  &none            &none
-            &none   &none  &kp BSLH    &kp FSLH      &kp MINUS   &kp LS(N8)                                                      &kp EQUAL   &kp LS(MINUS)  &kp LS(N1)    &kp LS(FSLH)   &none            &none
-            &none   &none  &kp LBKT    &kp LS(LBKT)  &kp LS(N9)  &kp LS(EQUAL)  &trans  &trans  &trans   &trans  &trans  &trans  &kp GRAVE   &kp LS(N0)     &kp LS(RBKT)  &kp RBKT       &none            &none
-            &none   &none  &none       &none         &none                      &trans  &trans  &trans   &trans  &trans  &trans              &none          &none         &none          &none            &none
+            &none   &none  &none       &none         &none                                                                                   &none          &none         &none          &none  &none
+            &none   &none  &none       &none         &none       &none                                                           &none       &none          &none         &none          &none  &none
+            &none   &none  &kp LS(N2)  &kp LS(N3)    &kp LS(N4)  &kp LS(N5)                                                      &kp LS(N6)  &kp LS(N7)     &kp LS(BSLH)  &kp LS(GRAVE)  &none  &none
+            &none   &none  &kp BSLH    &kp FSLH      &kp MINUS   &kp LS(N8)                                                      &kp EQUAL   &kp LS(MINUS)  &kp LS(N1)    &kp LS(FSLH)   &none  &none
+            &none   &none  &kp LBKT    &kp LS(LBKT)  &kp LS(N9)  &kp LS(EQUAL)  &trans  &trans  &trans   &trans  &trans  &trans  &kp GRAVE   &kp LS(N0)     &kp LS(RBKT)  &kp RBKT       &none  &none
+            &none   &none  &none       &none         &none                      &trans  &trans  &trans   &trans  &trans  &trans              &none          &none         &none          &none  &none
             >;
         };
 
@@ -195,6 +196,17 @@
             &none   &kp KP_N1  &kp KP_N2    &kp KP_N3     &kp KP_ENTER     &none  &trans  &trans  &trans   &trans  &trans  &trans  &none   &kp KP_N1    &kp KP_N2    &kp KP_N3     &kp KP_ENTER    &none
             &none   &kp KP_N0  &kp KP_N0    &kp KP_DOT    &kp KP_ENTER            &trans  &trans  &trans   &trans  &trans  &trans          &kp KP_N0    &kp KP_N0    &kp KP_DOT    &kp KP_ENTER    &none
             >;
+        };
+
+        os_layer {
+             bindings = <
+             &trans       &trans  &trans     &trans     &trans                                                                                   &kp INS           &kp PSCRN     &kp SLCK           &kp PAUSE_BREAK  &kp CAPS   
+             &trans       &trans  &trans     &trans     &trans     &trans                                                      &trans            &trans            &trans        &trans             &trans           &trans
+             &trans       &trans  &trans     &trans     &trans     &trans                                                      &kp LG(LS(UP))    &kp LG(LS(LEFT))  &kp LG(UP)    &kp LG(LS(RIGHT))  &trans           &trans
+             &kp LG(ESC)  &trans  &kp LG(E)  &kp LG(R)  &kp LG(T)  &trans                                                      &kp LG(LS(DOWN))  &kp LG(LEFT)      &kp LG(DOWN)  &kp LG(RIGHT)      &trans           &trans
+             &trans       &trans  &trans     &trans     &trans     &trans   &trans  &trans  &trans    &trans  &trans  &trans   &trans            &trans            &trans        &trans             &trans           &trans
+             &trans       &trans  &trans     &trans     &trans              &trans  &trans  &trans    &trans  &trans  &trans                     &kp LG(BSPC)      &trans        &trans             &trans           &trans
+             >;
         };
 
         magic_layer {

@@ -17,20 +17,21 @@
 #define DEFAULT    0
 #define QWERTY     1
 #define SYMBOLS    2
-#define NAVIGATION 3
-#define NUMPAD     4
-#define OS         5
-#define MAGIC      6
+#define NUMBERS    3
+#define NAVIGATION 4
+#define FNC_NUMPAD 5
+#define OS         6
+#define MAGIC      7
 
 / {
     behaviors {
-        // Press once for symbol later, twice for numpad layer.
-        sym_num: tap_dance_0 {
+        // Press once for symbol later, twice for F-keys/numpad layer.
+        sym_pad: tap_dance_0 {
             compatible = "zmk,behavior-tap-dance";
             label = "LAYER_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <350>;
-            bindings = <&sl SYMBOLS>, <&sl NUMPAD>;
+            bindings = <&sl SYMBOLS>, <&sl FNC_NUMPAD>;
         };
 
         // Press once for nav layer, twice for os layer, and thrice for super.
@@ -40,6 +41,15 @@
             #binding-cells = <0>;
             tapping-term-ms = <350>;
             bindings = <&sl NAVIGATION>, <&sl OS>, <&sk LGUI>;
+        };
+
+        // Press once for shift, twice for numbers.
+        shift_num: tap_dance_2 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "SHIFT_NUM";
+            #binding-cells = <0>;
+            tapping-term-ms = <350>;
+            bindings = <&sk LSHFT>, <&sl NUMBERS>;
         };
 
         // Backspace is backspace, Shift-Backspace is Delete.
@@ -121,12 +131,12 @@
             // | none  | none | none |  none  |  none  |      |  SHFT | SYM/NUM | none |  | none | NAV/OS/SUP | SPACE  |      | none |  none  |  none  | none  | QWERTY |
 
             bindings = <
-            &none          &none    &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                    &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
-            &none          &kp N1   &kp N2  &kp N3        &kp N4        &kp N5                                                                 &kp N6     &kp N7      &kp N8        &kp N9        &kp N0  &none
-            &kp TAB        &kp B    &kp Y   &kp O         &kp U         &kp LCTRL                                                              &kp RCTRL  &kp L       &kp D         &kp W         &kp V   &kp Z
-            &kp ESC        &kp C    &kp I   &kp E         &kp A         &kp RET                                                                &bspc_del  &kp H       &kp T         &kp S         &kp N   &kp Q
-            &none          &kp G    &kp X   &kp J         &kp K         &kp LALT   &none      &none     &none   &none  &none        &none      &kp RALT   &kp R       &kp M         &kp F         &kp P   &none
-            &magic MAGIC 0 &none    &none   &none         &none                    &sk LSHFT  &sym_num  &none   &none  &nav_os_sup  &kp SPACE             &none       &none         &none         &none   &tog QWERTY
+            &none          &none    &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                     &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
+            &none          &kp N1   &kp N2  &kp N3        &kp N4        &kp N5                                                                  &kp N6     &kp N7      &kp N8        &kp N9        &kp N0  &none
+            &kp TAB        &kp B    &kp Y   &kp O         &kp U         &kp LCTRL                                                               &kp RCTRL  &kp L       &kp D         &kp W         &kp V   &kp Z
+            &kp ESC        &kp C    &kp I   &kp E         &kp A         &kp RET                                                                 &bspc_del  &kp H       &kp T         &kp S         &kp N   &kp Q
+            &none          &kp G    &kp X   &kp J         &kp K         &kp LALT   &none       &none     &none   &none  &none        &none      &kp RALT   &kp R       &kp M         &kp F         &kp P   &none
+            &magic MAGIC 0 &none    &none   &none         &none                    &shift_num  &sym_pad  &none   &none  &nav_os_sup  &kp SPACE             &none       &none         &none         &none   &tog QWERTY
             >;
         };
 
@@ -168,6 +178,25 @@
             >;
         };
 
+        numbers_layer {
+            // -------------------------------------------------------------------------------------------------------------------------------------------------
+            // | none | none | none | none | none |                                                                  | none | none | none | none | none |
+            // | none | none | none | none | none | none  |                                                  | none  | none | none | none | none | none |
+            // | none | none | none | none | none | trans |                                                  |   .   |  7   |  8   |  9   | none | none |
+            // | none | none | none | none | none | trans |                                                  |   0   |  4   |  5   |  6   |  -   | none |
+            // | none | none | none | none | none | none  | trans | trans | trans |  | trans | trans | trans | none  |  1   |  2   |  3   | none | none |
+            // | none | none | none | none | none |       | trans | trans | trans |  | trans | trans | trans |       | none | none | none | none | none |
+
+            bindings = <
+            &none  &none  &none  &none  &none                                                                   &none   &none   &none   &none      &none
+            &none  &none  &none  &none  &none  &none                                                    &none   &none   &none   &none   &none      &none
+            &none  &none  &none  &none  &none  &trans                                                   &kp DOT &kp N7  &kp N8  &kp N9  &none      &none
+            &none  &none  &none  &none  &none  &trans                                                   &kp N0  &kp N4  &kp N5  &kp N6  &kp MINUS  &none
+            &none  &none  &none  &none  &none  &none   &trans  &trans  &trans   &trans  &trans  &trans  &none   &kp N1  &kp N2  &kp N3  &none      &none
+            &none  &none  &none  &none  &none          &trans  &trans  &trans   &trans  &trans  &trans          &none   &none   &none   &none      &none
+            >;
+        };
+
         navigation_layer {
             // -------------------------------------------------------------------------------------------------------------------------------------------------
             // | none | none | none | none | none |                                                                    | none | none | none  | none | none |
@@ -187,7 +216,7 @@
             >;
         };
 
-        numpad_layer {
+        fnc_numpad_layer {
             // -------------------------------------------------------------------------------------------------------------------------------------------------
             // | none | none | none | none | none |                                                                  | none | none | none | none | none |
             // | none | none | none | none | none | none  |                                                  | none  | none | none | none | none | none |

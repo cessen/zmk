@@ -51,6 +51,15 @@
             bindings = <&sl NAVIGATION>, <&sl OS>;
         };
 
+        // Backspace is backspace, Shift-Backspace is Delete.
+        bspc_del: backspace_delete {
+            compatible = "zmk,behavior-mod-morph";
+            label = "BACKSPACE_DELETE";
+            #binding-cells = <0>;
+            bindings = <&kp BSPC>, <&kp DEL>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
         magic: magic_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             label = "MAGIC_HOLD_TAP";
@@ -113,20 +122,20 @@
         default_layer {
             // A tweaked Engram layout.
             // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-            // | none  | none | none | BRI_DN | BRI_UP |                                                                          | MUTE | VOL_DN | VOL_UP | none  |  none  |
-            // | none  |  1   |  2   |   3    |   4    |    5     |                                                    |    6     |  7   |   8    |   9    |   0   |  none  |
-            // |  TAB  |  B   |  Y   |   O    |   U    |   CTRL   |                                                    |   CTRL   |  L   |   D    |   W    |   V   |   Z    |
-            // |  ESC  |  C   |  I   |   E    |   A    |   SHFT   |                                                    |   SHFT   |  H   |   T    |   S    |   N   |   Q    |
-            // | none  |  G   |  X   |   J    |   K    | ALT/SUP  |  RET   |  none   | none |  | none |  none  |  DEL  | ALT/SUP  |  R   |   M    |   F    |   P   |  none  |
-            // | MAGIC | none | none |  none  |  none  |          |  SPACE | NAV/OS  | none |  | none | SYM/NUM | BSPC  |          | none |  none  |  none  | none  | QWERTY |
+            // | none  | none | none | BRI_DN | BRI_UP |                                                                           | MUTE | VOL_DN | VOL_UP | none  |  none  |
+            // | none  |  1   |  2   |   3    |   4    |    5     |                                                     |    6     |  7   |   8    |   9    |   0   |  none  |
+            // |  TAB  |  B   |  Y   |   O    |   U    |   CTRL   |                                                     |   CTRL   |  L   |   D    |   W    |   V   |   Z    |
+            // |  ESC  |  C   |  I   |   E    |   A    |   SHFT   |                                                     |   BSPC   |  H   |   T    |   S    |   N   |   Q    |
+            // | none  |  G   |  X   |   J    |   K    | ALT/SUP  |  RET   |  none   | none |  | none |  none   |  DEL  | ALT/SUP  |  R   |   M    |   F    |   P   |  none  |
+            // | MAGIC | none | none |  none  |  none  |          |  SPACE | NAV/OS  | none |  | none | SYM/NUM | SHFT  |          | none |  none  |  none  | none  | QWERTY |
 
             bindings = <
-            &none          &none    &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                   &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
+            &none          &none    &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                               &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
             &none          &kp N1   &kp N2  &kp N3        &kp N4        &kp N5                                                            &kp N6     &kp N7      &kp N8        &kp N9        &kp N0  &none
-            &kp TAB        &kp B    &kp Y   &kp O         &kp U         &sk LCTRL                                                         &sk RCTRL  &kp L       &kp D         &kp W         &kp V   &kp Z
-            &kp ESC        &kp C    &kp I   &kp E         &kp A         &sk LSHFT                                                         &sk RSHFT  &kp H       &kp T         &kp S         &kp N   &kp Q
-            &none          &kp G    &kp X   &kp J         &kp K         &alt_sup   &kp RET    &none     &none   &none  &none    &kp DEL   &alt_sup   &kp R       &kp M         &kp F         &kp P   &none
-            &magic MAGIC 0 &none    &none   &none         &none                    &kp SPACE  &nav_os   &none   &none  &sym_num &kp BSPC             &none       &none         &none         &none   &tog QWERTY
+            &kp TAB        &kp B    &kp Y   &kp O         &kp U         &sk LCTRL                                                         &sk LCTRL  &kp L       &kp D         &kp W         &kp V   &kp Z
+            &kp ESC        &kp C    &kp I   &kp E         &kp A         &kp RET                                                           &bspc_del  &kp H       &kp T         &kp S         &kp N   &kp Q
+            &none          &kp G    &kp X   &kp J         &kp K         &alt_sup   &none      &none     &none   &none  &none    &none     &alt_sup   &kp R       &kp M         &kp F         &kp P   &none
+            &magic MAGIC 0 &none    &none   &none         &none                    &kp LSHFT  &sym_num  &none   &none  &nav_os  &kp SPACE            &none       &none         &none         &none   &tog QWERTY
             >;
         };
 
@@ -153,18 +162,18 @@
             // ----------------------------------------------------------------------------------------------------------------------------------------
             // | none | none | none | none | none |                                                                | none | none | none | none | none |
             // | none | none | none | none | none | none |                                                  | none | none | none | none | none | none |
-            // | none |  @   |  |   |  /   |  *   |  ?   |                                                  |  :   |  ,   |  "   |  ^   |  ~   | none |
-            // |  \   |  #   |  &   |  -   |  +   |  !   |                                                  |  ;   |  .   |  '   |  =   |  `   |  %   |
-            // |  $   |  <   |  [   |  {   |  (   | none | trans | trans | trans |  | trans | trans | trans | none |  )   |  }   |  ]   |  >   | none |
-            // | none | none | none | none | none |      |   _   |  RET  | trans |  | trans | trans | trans |      | none | none | none | none | none |
+            // | none |  ~   |  &   |  +   |  *   |  ?   |                                                  |  !   |  ,   |  "   |  ;   |  #   | none |
+            // | none |  ^   |  |   |  -   |  /   |  %   |                                                  |  =   |  .   |  '   |  :   |  `   |  $   |
+            // | none |  \   |  <   |  >   |  {   |  }   | trans | trans | trans |  | trans | trans | trans |  (   |  )   |  [   |  ]   |  @   | none |
+            // | none | none | none | none | none |      | trans | trans | trans |  | trans | trans |   _   |      | none | none | none | none | none |
 
             bindings = <
-            &none       &none          &none         &none         &none                                                                                               &none        &none         &none       &none          &none
-            &none       &none          &none         &none         &none          &none                                                                  &none         &none        &none         &none       &none          &none
-            &none       &kp LS(N2)     &kp LS(BSLH)  &kp FSLH      &kp LS(N8)     &kp LS(FSLH)                                                           &kp LS(SEMI)  &kp COMMA    &kp LS(SQT)   &kp LS(N6)  &kp LS(GRAVE)  &none
-            &kp BSLH    &kp LS(N3)     &kp LS(N7)    &kp MINUS     &kp LS(EQUAL)  &kp LS(N1)                                                             &kp SEMI      &kp DOT      &kp SQT       &kp EQUAL   &kp GRAVE      &kp LS(N5)
-            &kp LS(N4)  &kp LS(COMMA)  &kp LBKT      &kp LS(LBKT)  &kp LS(N9)     &none          &trans        &trans   &trans   &trans  &trans  &trans  &none         &kp LS(N0)   &kp LS(RBKT)  &kp RBKT    &kp LS(DOT)    &none
-            &none       &none          &none         &none         &none                         &kp LS(MINUS) &kp RET  &trans   &trans  &trans  &trans                &none        &none         &none       &none          &none
+            &none  &none          &none          &none          &none                                                                                             &none       &none        &none         &none       &none
+            &none  &none          &none          &none          &none         &none                                                                   &none       &none       &none        &none         &none       &none
+            &none  &kp LS(GRAVE)  &kp LS(N7)     &kp LS(EQUAL)  &kp LS(N8)    &kp LS(FSLH)                                                            &kp LS(N1)  &kp COMMA   &kp LS(SQT)  &kp SEMI      &kp LS(N3)  &none
+            &none  &kp LS(N6)     &kp LS(BSLH)   &kp MINUS      &kp FSLH      &kp LS(N5)                                                              &kp EQUAL   &kp DOT     &kp SQT      &kp LS(SEMI)  &kp GRAVE   &kp LS(N4)
+            &none  &kp BSLH       &kp LS(COMMA)  &kp LS(DOT)    &kp LS(LBKT)  &kp LS(RBKT)   &trans  &trans  &trans   &trans  &trans  &trans          &kp LS(N9)  &kp LS(N0)  &kp LBKT     &kp RBKT      &kp LS(N2)  &none
+            &none  &none          &none          &none          &none                        &trans  &trans  &trans   &trans  &trans  &kp LS(MINUS)               &none       &none        &none         &none       &none
             >;
         };
 
@@ -197,12 +206,12 @@
             // | none | none |  none   | none |   none    |       | trans | trans | trans |  | trans | trans | trans |      |  none   | none |   none    | none | none |
 
             bindings = <
-            &none     &none  &none      &none      &none      &none                                                      &none     &none      &none     &none      &none
+            &none     &none  &none      &none      &none                                                                           &none      &none     &none      &none    &none
             &none     &none  &none      &none      &none      &none                                                      &none     &none      &none     &none      &none    &none
             &none     &none  &kp PG_UP  &kp UP     &kp PG_DN  &trans                                                     &none     &kp PG_UP  &kp UP    &kp PG_DN  &none    &none
             &none     &none  &kp LEFT   &kp DOWN   &kp RIGHT  &trans                                                     &kp HOME  &kp LEFT   &kp DOWN  &kp RIGHT  &kp END  &none
             &none     &none  &none      &none      &none      &trans   &trans  &trans  &trans   &trans  &trans  &trans   &none     &none      &none     &none      &none    &none
-            &none     &none  &none      &none      &none               &trans  &trans  &trans   &trans  &trans  &kp DEL            &none      &none     &none      &none    &none
+            &none     &none  &none      &none      &none               &trans  &trans  &trans   &trans  &trans  &trans             &none      &none     &none      &none    &none
             >;
         };
 

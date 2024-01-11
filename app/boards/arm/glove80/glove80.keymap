@@ -18,9 +18,10 @@
 #define QWERTY     1
 #define SYMBOLS    2
 #define NUMBERS_FN 3
-#define NAVIGATION 4
-#define OS         5
-#define MAGIC      6
+#define HOTKEYS    4
+#define NAVIGATION 5
+#define OS         6
+#define MAGIC      7
 
 / {
     behaviors {
@@ -49,6 +50,15 @@
             #binding-cells = <0>;
             tapping-term-ms = <350>;
             bindings = <&sl NAVIGATION>, <&sl OS>;
+        };
+
+        // Press once for shift, twice for misc hotkeys.
+        shift_hk: tap_dance_3 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "SHIFT_HOTKEYS_TAP_DANCE";
+            #binding-cells = <0>;
+            tapping-term-ms = <350>;
+            bindings = <&sk LSHFT>, <&sl HOTKEYS>;
         };
 
         // Backspace is backspace, Shift-Backspace is Delete.
@@ -122,20 +132,20 @@
         default_layer {
             // A tweaked Engram layout.
             // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-            // | none  | none | none | BRI_DN | BRI_UP |                                                                           | MUTE | VOL_DN | VOL_UP | none  |  none  |
-            // | none  |  1   |  2   |   3    |   4    |    5     |                                                     |    6     |  7   |   8    |   9    |   0   |  none  |
-            // |  TAB  |  B   |  Y   |   O    |   U    |   CTRL   |                                                     |   CTRL   |  L   |   D    |   W    |   V   |   Z    |
-            // |  ESC  |  C   |  I   |   E    |   A    |   SHFT   |                                                     |   BSPC   |  H   |   T    |   S    |   N   |   Q    |
-            // | none  |  G   |  X   |   J    |   K    | ALT/SUP  |  RET   |  none   | none |  | none |  none   |  DEL  | ALT/SUP  |  R   |   M    |   F    |   P   |  none  |
-            // | MAGIC | none | none |  none  |  none  |          |  SPACE | NAV/OS  | none |  | none | SYM/NUM | SHFT  |          | none |  none  |  none  | none  | QWERTY |
+            // | none  | none | none | BRI_DN | BRI_UP |                                                                              | MUTE | VOL_DN | VOL_UP | none  |  none  |
+            // | none  |  1   |  2   |   3    |   4    |    5     |                                                        |    6     |  7   |   8    |   9    |   0   |  none  |
+            // |  TAB  |  B   |  Y   |   O    |   U    |   CTRL   |                                                        |   CTRL   |  L   |   D    |   W    |   V   |   Z    |
+            // |  ESC  |  C   |  I   |   E    |   A    |   RET    |                                                        | BSPC/DEL |  H   |   T    |   S    |   N   |   Q    |
+            // | none  |  G   |  X   |   J    |   K    | ALT/SUP  |  HOTKEYS  |  none   | none |  | none |  none   | none  | ALT/SUP  |  R   |   M    |   F    |   P   |  none  |
+            // | MAGIC | none | none |  none  |  none  |          |  SHIFT/HK | SYM/NUM | none |  | none | NAV/OS  | SPACE |          | none |  none  |  none  | none  | QWERTY |
 
             bindings = <
-            &none          &none    &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                               &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
-            &none          &kp N1   &kp N2  &kp N3        &kp N4        &kp N5                                                            &kp N6     &kp N7      &kp N8        &kp N9        &kp N0  &none
-            &kp TAB        &kp B    &kp Y   &kp O         &kp U         &sk LCTRL                                                         &sk LCTRL  &kp L       &kp D         &kp W         &kp V   &kp Z
-            &kp ESC        &kp C    &kp I   &kp E         &kp A         &kp RET                                                           &bspc_del  &kp H       &kp T         &kp S         &kp N   &kp Q
-            &none          &kp G    &kp X   &kp J         &kp K         &alt_sup   &none      &none     &none   &none  &none    &none     &alt_sup   &kp R       &kp M         &kp F         &kp P   &none
-            &magic MAGIC 0 &none    &none   &none         &none                    &kp LSHFT  &sym_num  &none   &none  &nav_os  &kp SPACE            &none       &none         &none         &none   &tog QWERTY
+            &none          &none    &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                 &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
+            &none          &kp N1   &kp N2  &kp N3        &kp N4        &kp N5                                                              &kp N6     &kp N7      &kp N8        &kp N9        &kp N0  &none
+            &kp TAB        &kp B    &kp Y   &kp O         &kp U         &sk LCTRL                                                           &sk LCTRL  &kp L       &kp D         &kp W         &kp V   &kp Z
+            &kp ESC        &kp C    &kp I   &kp E         &kp A         &kp RET                                                             &bspc_del  &kp H       &kp T         &kp S         &kp N   &kp Q
+            &none          &kp G    &kp X   &kp J         &kp K         &alt_sup   &sl HOTKEYS  &none     &none   &none  &none    &none     &alt_sup   &kp R       &kp M         &kp F         &kp P   &none
+            &magic MAGIC 0 &none    &none   &none         &none                    &shift_hk    &sym_num  &none   &none  &nav_os  &kp SPACE            &none       &none         &none         &none   &tog QWERTY
             >;
         };
 
@@ -195,6 +205,25 @@
             &none  &none   &none    &none    &none            &trans  &trans  &trans   &trans  &trans  &trans           &none   &none   &none   &none      &none
             >;
         };
+
+         hotkeys_layer {
+             // ----------------------------------------------------------------------------------------------------------------------------------------
+             // | none |  none  |  none  |  none  |  none  |                                                                | none | none | none | none | none |
+             // | none |  none  |  none  |  none  |  none  | none |                                                  | none | none | none | none | none | none |
+             // | none |  none  |  none  |  none  |  none  | none |                                                  | none | none | none | none | none | none |
+             // | none | Ctrl-Z | Ctrl-X | Ctrl-C | Ctrl-V | none |                                                  | none | none | none | none | none | none |
+             // | none |  none  |  none  |  none  |  none  | none | trans | trans | trans |  | trans | trans | trans | none | none | none | none | none | none |
+             // | none |  none  |  none  |  none  |  none  |      | trans | trans | trans |  | trans | trans | trans |      | none | none | none | none | none |
+
+             bindings = <
+             &none   &none     &none     &none     &none                                                                              &none   &none   &none   &none   &none
+             &none   &none     &none     &none     &none      &none                                                           &none   &none   &none   &none   &none   &none
+             &none   &none     &none     &none     &none      &none                                                           &none   &none   &none   &none   &none   &none
+             &none   &kp LC(Z) &kp LC(X) &kp LC(C) &kp LC(V)  &none                                                           &none   &none   &none   &none   &none   &none
+             &none   &none     &none     &none     &none      &none   &trans   &trans   &trans     &trans   &trans   &trans   &none   &none   &none   &none   &none   &none
+             &none   &none     &none     &none     &none              &trans   &trans   &trans     &trans   &trans   &trans           &none   &none   &none   &none   &none
+             >;
+         };
 
         navigation_layer {
             // -------------------------------------------------------------------------------------------------------------------------------------------------

@@ -43,22 +43,22 @@
             bindings = <&sl SYMBOLS>, <&sl NUMBERS_FN>, <&sl OS>;
         };
 
-        // Press once for nav layer, twice for os layer.
-        nav_os: tap_dance_2 {
-            compatible = "zmk,behavior-tap-dance";
-            label = "NAV_OS_TAP_DANCE";
-            #binding-cells = <0>;
-            tapping-term-ms = <350>;
-            bindings = <&sl NAVIGATION>, <&sl OS>;
-        };
-
         // Press once for shift, twice for misc hotkeys.
-        shift_hk: tap_dance_3 {
+        shift_hk: tap_dance_2 {
             compatible = "zmk,behavior-tap-dance";
             label = "SHIFT_HOTKEYS_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <350>;
             bindings = <&kp LSHFT>, <&mo HOTKEYS>;
+        };
+
+        // Press once for nav layer, twice for os layer.
+        nav_os: tap_dance_3 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "NAV_OS_TAP_DANCE";
+            #binding-cells = <0>;
+            tapping-term-ms = <350>;
+            bindings = <&sl NAVIGATION>, <&sl OS>;
         };
 
         // Backspace is backspace, Ctrl-Backspace is Delete.
@@ -142,12 +142,12 @@
         default_layer {
             // A tweaked Engram layout.
             // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-            // |  none  | none | none | BRI_DN | BRI_UP |                                                                               | MUTE | VOL_DN | VOL_UP | none |  none  |
-            // |  none  | none | none |  none  |  none  |   none   |                                                         |   none   | none |  none  |  none  | none |  none  |
-            // |  TAB   |  B   |  Y   |   O    |   U    |    "     |                                                         |    ,     |  L   |   D    |   W    |  V   |   Z    |
-            // |  ESC   |  C   |  I   |   E    |   A    |    '     |                                                         |    .     |  H   |   T    |   S    |  N   |   Q    |
-            // | QWERTY |  G   |  X   |   J    |   K    | CTRL/ALT |  SYM/OS   |   none    | none |  | none | none | NAV/NUM | CTRL/ALT |  R   |   M    |   F    |  P   | SUPER  |
-            // | MAGIC  | none | none |  none  |  none  |          |  SHIFT/HK | BSPC/DEL  | none |  | none | RET  | SPACE   |          | none |  none  |  none  | none |  none  |
+            // |  none  | none | none | BRI_DN | BRI_UP |                                                                                 | MUTE | VOL_DN | VOL_UP | none |  none  |
+            // |  none  | none | none |  none  |  none  |   none   |                                                           |   none   | none |  none  |  none  | none |  none  |
+            // |  TAB   |  B   |  Y   |   O    |   U    |    "     |                                                           |    ,     |  L   |   D    |   W    |  V   |   Z    |
+            // |  ESC   |  C   |  I   |   E    |   A    |    '     |                                                           |    .     |  H   |   T    |   S    |  N   |   Q    |
+            // | QWERTY |  G   |  X   |   J    |   K    | CTRL/ALT |  SYM/NUM/OS |   none    | none |  | none | none | NAV/OS  | CTRL/ALT |  R   |   M    |   F    |  P   | SUPER  |
+            // | MAGIC  | none | none |  none  |  none  |          |   SHIFT/HK  | BSPC/DEL  | none |  | none | RET  | SPACE   |          | none |  none  |  none  | none |  none  |
 
             bindings = <
             &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                   &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
@@ -257,12 +257,12 @@
 
         os_layer {
              bindings = <
-             &none        &none   &none  &none      &none                                                                                            &kp INS       &kp PSCRN     &kp SLCK       &kp PAUSE_BREAK  &kp CAPS
-             &none        &none   &none  &none      &none      &none                                                                   &none         &none         &none         &none          &none           &none
-             &none        &none   &none  &none      &none      &kp LC(LA(DEL))                                                         &none         &none         &kp LG(UP)    &none          &none           &none
-             &kp LG(ESC)  &none   &none  &kp LG(E)  &kp LG(R)  &kp LG(T)                                                               &kp LG(BSPC)  &kp LG(LEFT)  &kp LG(DOWN)  &kp LG(RIGHT)  &none           &none
-             &none        &none   &none  &none      &none      &none            &trans  &trans        &trans   &trans  &trans  &trans  &none         &none         &none         &none          &none           &none
-             &none        &none   &none  &none      &none                       &trans  &kp LG(BSPC)  &trans   &trans  &trans  &trans                &none         &none         &none          &none           &none
+             &none        &none   &none  &none      &none                                                                                                   &kp INS           &kp PSCRN     &kp SLCK           &kp PAUSE_BREAK  &kp CAPS
+             &none        &none   &none  &none      &none      &none                                                                          &none         &none             &none         &none              &none            &none
+             &none        &none   &none  &none      &none      &kp LC(LA(DEL))                                                                &none         &kp LS(LG(UP))    &kp LG(UP)    &kp LS(LG(DOWN))   &none            &none
+             &kp LG(ESC)  &none   &none  &kp LG(E)  &kp LG(R)  &kp LG(T)                                                                      &kp LG(BSPC)  &kp LG(LEFT)      &kp LG(DOWN)  &kp LG(RIGHT)      &none            &none
+             &none        &none   &none  &none      &none      &none            &trans  &trans        &trans   &trans  &trans  &trans         &none         &kp LS(LG(LEFT))  &none         &kp LS(LG(RIGHT))  &none            &none
+             &none        &none   &none  &none      &none                       &trans  &kp LG(BSPC)  &trans   &trans  &trans  &kp LG(SPACE)                &none             &none         &none              &none            &none
              >;
         };
 

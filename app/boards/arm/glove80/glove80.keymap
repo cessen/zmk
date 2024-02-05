@@ -40,7 +40,7 @@
             label = "SYM_NUM_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <350>;
-            bindings = <&sl SYMBOLS>, <&sl NUMBERS_FN>, <&sl OS>;
+            bindings = <&mo SYMBOLS>, <&mo NUMBERS_FN>, <&mo OS>;
         };
 
         // Press once for shift, twice for misc hotkeys.
@@ -58,16 +58,16 @@
             label = "NAV_OS_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <350>;
-            bindings = <&sl NAVIGATION>, <&sl OS>;
+            bindings = <&mo NAVIGATION>, <&mo OS>;
         };
 
-        // Backspace is backspace, Ctrl-Backspace is Delete.
+        // Backspace is backspace, Shift-Backspace is Delete.
         bspc_del: backspace_delete {
             compatible = "zmk,behavior-mod-morph";
             label = "BACKSPACE_DELETE";
             #binding-cells = <0>;
             bindings = <&kp BSPC>, <&kp DEL>;
-            mods = <(MOD_LCTL|MOD_RCTL)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
         magic: magic_hold_tap {
@@ -141,21 +141,21 @@
 
         default_layer {
             // A tweaked Engram layout.
-            // ---------------------------------------------------------------------------------------------------------------------------------------------------------------
-            // | none  | none | none | BRI_DN | BRI_UP |                                                                                 | MUTE | VOL_DN | VOL_UP | none |  none  |
-            // | none  | none | none |  none  |  none  |   none   |                                                           |   none   | none |  none  |  none  | none |  none  |
-            // |  TAB  |  B   |  Y   |   O    |   U    |    "     |                                                           |    ,     |  L   |   D    |   W    |  V   |   Z    |
-            // |  ESC  |  C   |  I   |   E    |   A    |    '     |                                                           |    .     |  H   |   T    |   S    |  N   |   Q    |
-            // | SUPER |  G   |  X   |   J    |   K    | CTRL/ALT |  SYM/NUM/OS |   none    | none |  | none | none | NAV/OS  | CTRL/ALT |  R   |   M    |   F    |  P   | QWERTY |
-            // | MAGIC | none | none |  none  |  none  |          |   SHIFT/HK  | BSPC/DEL  | none |  | none | RET  | SPACE   |          | none |  none  |  none  | none |  none  |
+            // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            // | none  | none | none | BRI_DN | BRI_UP |                                                                                   | MUTE | VOL_DN | VOL_UP | none |  none  |
+            // | none  | none | none |  none  |  none  |   none   |                                                             |   none   | none |  none  |  none  | none |  none  |
+            // |  TAB  |  B   |  Y   |   O    |   U    |    "     |                                                             |    ,     |  L   |   D    |   W    |  V   |   Z    |
+            // |  ESC  |  C   |  I   |   E    |   A    |    '     |                                                             |    .     |  H   |   T    |   S    |  N   |   Q    |
+            // | SUPER |  G   |  X   |   J    |   K    | CTRL/ALT |    RET    |    none    | none |  | none |  none  | BSPC/DEL | CTRL/ALT |  R   |   M    |   F    |  P   | QWERTY |
+            // | MAGIC | none | none |  none  |  none  |          | SHIFT/HK  | SYM/NUM/OS | none |  | none | NAV/OS |  SPACE   |          | none |  none  |  none  | none |  none  |
 
             bindings = <
-            &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                   &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
-            &none           &none   &none   &none         &none         &none                                                                 &none      &none       &none         &none         &none   &none
-            &kp TAB         &kp B   &kp Y   &kp O         &kp U         &kp LS(SQT)                                                           &kp COMMA  &kp L       &kp D         &kp W         &kp V   &kp Z
-            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp SQT                                                               &kp DOT    &kp H       &kp T         &kp S         &kp N   &kp Q
-            &kp LGUI        &kp G   &kp X   &kp J         &kp K         &ctrl_alt    &sym_num_os  &none     &none   &none  &none   &nav_os    &ctrl_alt  &kp R       &kp M         &kp F         &kp P   &tog QWERTY
-            &magic MAGIC 0  &none   &none   &none         &none                      &shift_hk    &bspc_del &none   &none  &kp RET &kp SPACE             &none       &none         &none         &none   &none
+            &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                     &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
+            &none           &none   &none   &none         &none         &none                                                                   &none      &none       &none         &none         &none   &none
+            &kp TAB         &kp B   &kp Y   &kp O         &kp U         &kp LS(SQT)                                                             &kp COMMA  &kp L       &kp D         &kp W         &kp V   &kp Z
+            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp SQT                                                                 &kp DOT    &kp H       &kp T         &kp S         &kp N   &kp Q
+            &kp LGUI        &kp G   &kp X   &kp J         &kp K         &ctrl_alt    &kp RET    &none         &none   &none  &none   &bspc_del  &ctrl_alt  &kp R       &kp M         &kp F         &kp P   &tog QWERTY
+            &magic MAGIC 0  &none   &none   &none         &none                      &shift_hk  &sym_num_os   &none   &none  &nav_os &kp SPACE             &none       &none         &none         &none   &none
             >;
         };
 

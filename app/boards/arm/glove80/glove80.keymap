@@ -179,21 +179,22 @@
         };
 
         symbols_layer {
-            // ----------------------------------------------------------------------------------------------------------------------------------------
-            // | none | none | none | none | none |                                                                | none | none | none | none | none |
-            // | none | none | none | none | none | none |                                                  | none | none | none | none | none | none |
-            // | none | none |  &   |  +   |  *   |  !   |                                                  |  ?   |  [   |  ]   |  ;   | none | none |
-            // | none |  $   |  |   |  -   |  /   |  %   |                                                  |  =   |  (   |  )   |  :   |  @   | none |
-            // | none | none |  ^   |  ~   |  \   | none | trans | trans | trans |  | trans | trans | trans |  #   |  {   |  }   |  `   | none | none |
-            // | none | none | none | none | none |      | trans | trans | trans |  | trans | trans |   _   |      | none | none | none | none | none |
+            // Symbols and numbers.
+            // ------------------------------------------------------------------------------------------------------------------------------------------
+            // |       |      |      |      |      |                                                                |      |      |      |      |       |
+            // |       |      |      |      |      |      |                                                  |      |      |      |      |      |       |
+            // |       | ~    |  &   |  [   |  ]   |  *   |                                                  |  `   |  7   |  8   |  9   |  @   |       |
+            // |       | %    |  !   |  (   |  )   |  =   |                                                  |  0   |  4   |  5   |  6   |  #   |       |
+            // | trans | ^    |  |   |  {   |  }   |  +   | trans | trans | trans |  | trans | trans | Del   |  \   |  1   |  2   |  3   |  $   | trans |
+            // |       |      |      |      |      |      | trans | trans | trans |  | trans | trans | _     |      |      |      |      |      |       |
 
             bindings = <
-            &none  &none       &none         &none          &none                                                                                         &none         &none         &none         &none       &none
-            &none  &none       &none         &none          &none       &none                                                               &none         &none         &none         &none         &none       &none
-            &none  &none       &kp LS(N7)    &kp LS(EQUAL)  &kp LS(N8)  &kp LS(N1)                                                          &kp LS(FSLH)  &kp LBKT      &kp RBKT      &kp SEMI      &kp BSLH    &none
-            &none  &kp LS(N4)  &kp LS(BSLH)  &kp MINUS      &kp FSLH    &kp LS(N5)                                                          &kp EQUAL     &kp LS(N9)    &kp LS(N0)    &kp LS(SEMI)  &kp LS(N2)  &none
-            &none  &none       &kp LS(N6)    &kp LS(GRAVE)  &kp BSLH    &none       &trans  &trans  &trans   &trans  &trans  &trans         &kp LS(N3)    &kp LS(LBKT)  &kp LS(RBKT)  &kp GRAVE     &none       &none
-            &none  &none       &none         &none          &none                   &trans  &trans  &trans   &trans  &trans  &kp LS(MINUS)                &none         &none         &none         &none       &none
+            &none   &none      &none     &none     &none                                                                               &none   &none   &none   &none     &none
+            &none   &none      &none     &none     &none     &none                                                          &none      &none   &none   &none   &none     &none
+            &none   &kp TILDE  &kp AMPS  &kp LBKT  &kp RBKT  &kp ASTRK                                                      &kp GRAVE  &kp N7  &kp N8  &kp N9  &kp AT    &none
+            &none   &kp PRCNT  &kp EXCL  &kp LPAR  &kp RPAR  &kp EQUAL                                                      &kp N0     &kp N4  &kp N5  &kp N6  &kp HASH  &none
+            &trans  &kp CARET  &kp PIPE  &kp LBRC  &kp RBRC  &kp PLUS   &trans  &trans  &trans   &trans  &trans  &kp DEL    &kp BSLH   &kp N1  &kp N2  &kp N3  &kp DLLR  &trans
+            &none   &none      &none     &none     &none                &trans  &trans  &trans   &trans  &trans  &kp UNDER             &none   &none   &none   &none     &none
             >;
         };
 
@@ -236,33 +237,34 @@
          };
 
         navigation_layer {
+            // Navigation and F-keys.
             // -------------------------------------------------------------------------------------------------------------------------------------------------
-            // | none | none |  none   | none |   none    |                                                                 |  none   | none |   none    | none | none |
-            // | none | none |  none   | none |   none    | none  |                                                  | none |  none   | none |   none    | none | none |
-            // | none | none | Page Up |  Up  | Page Down | trans |                                                  | none | Page Up |  Up  | Page Down | none | none |
-            // | none | none |  Left   | Down |   Right   | trans |                                                  | Home |  Left   | Down |   Right   | End  | none |
-            // | none | none |  none   | none |   none    | trans | trans | trans | trans |  | trans | trans | trans | none |  none   | none |   none    | none | none |
-            // | none | none |  none   | none |   none    |       | trans | trans | trans |  | trans | trans | trans |      |  none   | none |   none    | none | none |
+            // |       |      |      |      |      |                                                               |      |     |      |      |       |
+            // |       |      |      |      |      |     |                                                  |      |      |     |      |      |       |
+            // |       |  F9  | F10  | F11  | F12  |     |                                                  | PgUp | Home |  ↑  | End  |      |       |
+            // |       |  F5  | F6   | F7   | F8   |     |                                                  | PgDn |   ←  |  ↓  |  →   |      |       |
+            // | trans |  F1  | F2   | F3   | F4   |     | trans | trans | trans |  | trans | trans | trans |      |      |     |      |      | trans |
+            // |       |      |      |      |      |     | trans | trans | trans |  | trans | trans | trans |      |      |     |      |      |       |
 
             bindings = <
-            &none     &none  &none      &none      &none                                                                           &none      &none     &none      &none    &none
-            &none     &none  &none      &none      &none      &none                                                      &none     &none      &none     &none      &none    &none
-            &none     &none  &kp PG_UP  &kp UP     &kp PG_DN  &trans                                                     &none     &kp PG_UP  &kp UP    &kp PG_DN  &none    &none
-            &none     &none  &kp LEFT   &kp DOWN   &kp RIGHT  &trans                                                     &kp HOME  &kp LEFT   &kp DOWN  &kp RIGHT  &kp END  &none
-            &none     &none  &none      &none      &none      &trans   &trans  &trans  &trans   &trans  &trans  &trans   &none     &none      &none     &none      &none    &none
-            &none     &none  &none      &none      &none               &trans  &trans  &trans   &trans  &trans  &trans             &none      &none     &none      &none    &none
+            &none     &none   &none    &none    &none                                                                          &none      &none     &none      &none    &none
+            &none     &none   &none    &none    &none    &none                                                      &none      &none      &none     &none      &none    &none
+            &none     &kp F9  &kp F10  &kp F11  &kp F12  &none                                                      &kp PG_UP  &kp HOME   &kp UP    &kp END    &none    &none
+            &none     &kp F5  &kp F6   &kp F7   &kp F8   &none                                                      &kp PG_DN  &kp LEFT   &kp DOWN  &kp RIGHT  &kp END  &none
+            &trans    &kp F1  &kp F2   &kp F3   &kp F4   &none    &trans  &trans  &trans   &trans  &trans  &trans   &none      &none      &none     &none      &none    &trans
+            &none     &none   &none    &none    &none             &trans  &trans  &trans   &trans  &trans  &trans              &none      &none     &none      &none    &none
             >;
         };
 
 
         os_layer {
              bindings = <
-             &none        &none   &none  &none      &none                                                                                          &kp INS           &kp PSCRN     &kp SLCK           &kp PAUSE_BREAK  &kp CAPS
-             &none        &none   &none  &none      &none          &none                                                             &none         &none             &none         &none              &none            &none
-             &none        &none   &none  &none      &kp LG(SPACE)  &kp LC(LA(DEL))                                                   &none         &kp LS(LG(UP))    &kp LG(UP)    &kp LS(LG(DOWN))   &none            &none
-             &kp LG(ESC)  &none   &none  &kp LG(E)  &kp LG(R)      &kp LG(T)                                                         &kp LG(BSPC)  &kp LG(LEFT)      &kp LG(DOWN)  &kp LG(RIGHT)      &none            &none
-             &none        &none   &none  &none      &none          &none            &trans  &trans  &trans   &trans  &trans  &trans  &none         &kp LS(LG(LEFT))  &none         &kp LS(LG(RIGHT))  &none            &none
-             &none        &none   &none  &none      &none                           &trans  &trans  &trans   &trans  &trans  &trans                &none             &none         &none              &none            &none
+             &none        &none   &none  &none      &none                                                                                              &kp INS           &kp PSCRN     &kp SLCK           &kp PAUSE_BREAK  &kp CAPS
+             &none        &none   &none  &none      &none          &none                                                             &none             &none             &none         &none              &none            &none
+             &none        &none   &none  &none      &kp LG(SPACE)  &kp LC(LA(DEL))                                                   &kp LS(LG(UP))    &kp LS(LG(LEFT))  &kp LG(UP)    &kp LS(LG(RIGHT))  &none            &none
+             &kp LG(ESC)  &none   &none  &kp LG(E)  &kp LG(R)      &kp LG(T)                                                         &kp LS(LG(DOWN))  &kp LG(LEFT)      &kp LG(DOWN)  &kp LG(RIGHT)      &none            &kp LG(BSPC)
+             &none        &none   &none  &none      &none          &none            &trans  &trans  &trans   &trans  &trans  &trans  &none             &none             &none         &none              &none            &none
+             &none        &none   &none  &none      &none                           &trans  &trans  &trans   &trans  &trans  &trans                    &none             &none         &none              &none            &none
              >;
         };
 

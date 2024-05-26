@@ -141,21 +141,21 @@
 
         default_layer {
             // A tweaked Engram layout.
-            // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            // | none  | none | none | BRI_DN | BRI_UP |                                                                                   | MUTE | VOL_DN | VOL_UP | none |  none  |
-            // | none  | none | none |  none  |  none  |   none   |                                                             |   none   | none |  none  |  none  | none |  none  |
-            // |  TAB  |  B   |  Y   |   O    |   U    |    "     |                                                             |    ,     |  L   |   D    |   W    |  V   |   Z    |
-            // |  ESC  |  C   |  I   |   E    |   A    |    '     |                                                             |    .     |  H   |   T    |   S    |  N   |   Q    |
-            // | SUPER |  G   |  X   |   J    |   K    | CTRL/ALT |   RET    |    none     | none |  | none |  none  | BSPC/DEL | CTRL/ALT |  R   |   M    |   F    |  P   | QWERTY |
-            // | MAGIC | none | none |  none  |  none  |          | SHIFT/HK | SYM/NUM/OS  | none |  | none | NAV/OS |  SPACE   |          | none |  none  |  none  | none |  none  |
+            // ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            // | none     | none | none | BRI_DN | BRI_UP |                                                                          | MUTE | VOL_DN | VOL_UP | none | none     |
+            // | none     | none | none | none   | none   | none |                                                            | none | none | none   | none   | none | none     |
+            // | TAB      | B    | Y    | O      | U      | ' "  |                                                            | ; :  | L    | D      | W      | V    | Z        |
+            // | ESC      | C    | I    | E      | A      | , <  |                                                            | . >  | H    | T      | S      | N    | Q        |
+            // | CTRL/ALT | G    | X    | J      | K      | - _  | RET      | SUPER      | none |  | none | SUPER  | BSPC/DEL | / ?  | R    | M      | F      | P    | CTRL/ALT |
+            // | MAGIC    | none | none | none   | none   |      | SHIFT/HK | SYM/NUM/OS | none |  | none | NAV/OS | SPACE    |      | none | none   | none   | none | QWERTY   |
 
             bindings = <
             &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                     &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
             &none           &none   &none   &none         &none         &none                                                                   &none      &none       &none         &none         &none   &none
-            &kp TAB         &kp B   &kp Y   &kp O         &kp U         &kp LS(SQT)                                                             &kp COMMA  &kp L       &kp D         &kp W         &kp V   &kp Z
-            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp SQT                                                                 &kp DOT    &kp H       &kp T         &kp S         &kp N   &kp Q
-            &kp LGUI        &kp G   &kp X   &kp J         &kp K         &ctrl_alt    &kp RET    &none        &none   &none  &none    &bspc_del  &ctrl_alt  &kp R       &kp M         &kp F         &kp P   &tog QWERTY
-            &magic MAGIC 0  &none   &none   &none         &none                      &shift_hk  &sym_num_os  &none   &none  &nav_os  &kp SPACE             &none       &none         &none         &none   &none
+            &kp TAB         &kp B   &kp Y   &kp O         &kp U         &kp SQT                                                                 &kp SEMI   &kp L       &kp D         &kp W         &kp V   &kp Z
+            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp COMMA                                                               &kp DOT    &kp H       &kp T         &kp S         &kp N   &kp Q
+            &ctrl_alt       &kp G   &kp X   &kp J         &kp K         &kp MINUS    &kp RET    &kp LGUI     &none   &none  &kp LGUI &bspc_del  &kp FSLH   &kp R       &kp M         &kp F         &kp P   &ctrl_alt
+            &magic MAGIC 0  &none   &none   &none         &none                      &shift_hk  &sym_num_os  &none   &none  &nav_os  &kp SPACE             &none       &none         &none         &none   &tog QWERTY
             >;
         };
 

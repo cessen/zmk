@@ -120,17 +120,17 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            // A tweaked Engram layout.
+            // A modified Engram layout.
             // -----------------------------------------                                                                                 ----------------------------------------
             // |       |      |      | BRI_DN | BRI_UP |                                                                                 | MUTE | VOL_DN | VOL_UP |      |      |
             // ------------------------------------------------                                                                   -----------------------------------------------
             // |       |      |      |        |        |      |                                                                   |      |      |        |        |      |      |
             // ------------------------------------------------                                                                   -----------------------------------------------
-            // | TAB   | B    | Y    | O      | U      | / ?  |                                                                   | , <  | L    | D      | W      | V    | Z    |
+            // | Z     | X    | Y    | O      | U      | / ?  |                                                                   | , <  | L    | D      | W      | J    | Q    |
             // ------------------------------------------------                                                                   -----------------------------------------------
-            // | ESC   | C    | I    | E      | A      | ' "  |                                                                   | . >  | H    | T      | S      | N    | Q    |
+            // | ESC   | C    | I    | E      | A      | ' "  |                                                                   | . >  | H    | T      | S      | N    | TAB  |
             // ------------------------------------------------ -----------------------------  ---------------------------------- -----------------------------------------------
-            // |       | G    | X    | J      | K      | - _  | | RET    | RET   | SUPER    |  | SUPER    | BSPC/DEL | BSPC/DEL | | ; :  | R    | M      | F      | P    |      |
+            // |       | G    | V    | B      | K      | - _  | | RET    | RET   | SUPER    |  | SUPER    | BSPC/DEL | BSPC/DEL | | ; :  | R    | M      | F      | P    |      |
             // ------------------------------------------------ -----------------------------  ---------------------------------- -----------------------------------------------
             // | MAGIC |      |      |        |        |        | SYM/HK | SHIFT | CTRL/ALT |  | CTRL/ALT | SPACE    | NAV/OS   |        |      |        |        |      |      |
             // -----------------------------------------        -----------------------------  ----------------------------------        ----------------------------------------
@@ -138,9 +138,9 @@
             bindings = <
             &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                           &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
             &none           &none   &none   &none         &none         &none                                                                         &none      &none       &none         &none         &none   &none
-            &kp TAB         &kp B   &kp Y   &kp O         &kp U         &kp FSLH                                                                      &kp COMMA  &kp L       &kp D         &kp W         &kp V   &kp Z
-            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp SQT                                                                       &kp DOT    &kp H       &kp T         &kp S         &kp N   &kp Q
-            &none           &kp G   &kp X   &kp J         &kp K         &kp MINUS    &kp RET  &kp RET    &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &kp SEMI   &kp R       &kp M         &kp F         &kp P   &none
+            &kp Z           &kp X   &kp Y   &kp O         &kp U         &kp FSLH                                                                      &kp COMMA  &kp L       &kp D         &kp W         &kp J   &kp Q
+            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp SQT                                                                       &kp DOT    &kp H       &kp T         &kp S         &kp N   &kp TAB
+            &none           &kp G   &kp V   &kp B         &kp K         &kp MINUS    &kp RET  &kp RET    &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &kp SEMI   &kp R       &kp M         &kp F         &kp P   &none
             &magic MAGIC 0  &none   &none   &none         &none                      &sym_hk  &kp LSHFT  &ctrl_alt   &ctrl_alt  &kp SPACE  &nav_os               &none       &none         &none         &none   &none
             >;
         };

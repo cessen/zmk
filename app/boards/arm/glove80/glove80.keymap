@@ -58,6 +58,20 @@
             tapping-term-ms = <200>;
             bindings = <&mo>, <&rgb_ug_status_macro>;
         };
+
+        hash_perc: hash_percent {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp HASH>, <&kp PERCENT>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        at_dlr: at_dollar {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp AT>, <&kp DOLLAR>;
+            mods = <(MOD_LSFT)>;
+        };
     };
 
     macros {
@@ -126,22 +140,22 @@
             // ------------------------------------------------                                                                   -----------------------------------------------
             // |       |      |      |        |        |      |                                                                   |      |      |        |        |      |      |
             // ------------------------------------------------                                                                   -----------------------------------------------
-            // | Z     | X    | Y    | O      | U      | / ?  |                                                                   | , <  | L    | D      | W      | J    | Q    |
+            // | ` ~   | Z    | Y    | O      | U      | X    |                                                                   | J    | L    | D      | W      | Q    | DEL  |
             // ------------------------------------------------                                                                   -----------------------------------------------
-            // | ESC   | C    | I    | E      | A      | ' "  |                                                                   | . >  | H    | T      | S      | N    | TAB  |
+            // | ESC   | C    | I    | E      | A      | , <  |                                                                   | . >  | H    | T      | S      | N    | TAB  |
             // ------------------------------------------------ -----------------------------  ---------------------------------- -----------------------------------------------
-            // |       | G    | V    | B      | K      | - _  | | RET    | RET   | SUPER    |  | SUPER    | BSPC/DEL | BSPC/DEL | | ; :  | R    | M      | F      | P    |      |
+            // | # %   | G    | V    | B      | K      | ' "  | | RET    | RET   | SUPER    |  | SUPER    | BSPC/DEL | BSPC/DEL | | ; :  | R    | M      | F      | P    | @ $  |
             // ------------------------------------------------ -----------------------------  ---------------------------------- -----------------------------------------------
             // | MAGIC |      |      |        |        |        | SYM/HK | SHIFT | CTRL/ALT |  | CTRL/ALT | SPACE    | NAV/OS   |        |      |        |        |      |      |
             // -----------------------------------------        -----------------------------  ----------------------------------        ----------------------------------------
 
             bindings = <
-            &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                           &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
-            &none           &none   &none   &none         &none         &none                                                                         &none      &none       &none         &none         &none   &none
-            &kp Z           &kp X   &kp Y   &kp O         &kp U         &kp FSLH                                                                      &kp COMMA  &kp L       &kp D         &kp W         &kp J   &kp Q
-            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp SQT                                                                       &kp DOT    &kp H       &kp T         &kp S         &kp N   &kp TAB
-            &none           &kp G   &kp V   &kp B         &kp K         &kp MINUS    &kp RET  &kp RET    &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &kp SEMI   &kp R       &kp M         &kp F         &kp P   &none
-            &magic MAGIC 0  &none   &none   &none         &none                      &sym_hk  &kp LSHFT  &ctrl_alt   &ctrl_alt  &kp SPACE  &nav_os               &none       &none         &none         &none   &none
+            &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                        &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
+            &none           &none   &none   &none         &none         &none                                                                       &none     &none       &none         &none         &none   &none
+            &kp GRAVE       &kp Z   &kp Y   &kp O         &kp U         &kp X                                                                       &kp J     &kp L       &kp D         &kp W         &kp Q   &kp DEL
+            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp COMMA                                                                   &kp DOT   &kp H       &kp T         &kp S         &kp N   &kp TAB
+            &hash_perc      &kp G   &kp V   &kp B         &kp K         &kp SQT    &kp RET  &kp RET    &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &kp SEMI  &kp R       &kp M         &kp F         &kp P   &at_dlr
+            &magic MAGIC 0  &none   &none   &none         &none                    &sym_hk  &kp LSHFT  &ctrl_alt   &ctrl_alt  &kp SPACE  &nav_os              &none       &none         &none         &none   &none
             >;
         };
 
@@ -152,22 +166,22 @@
             // --------------------------------------------                                                      --------------------------------------------
             // |       |      |      |      |      |      |                                                      |      |      |      |      |      |       |
             // --------------------------------------------                                                      --------------------------------------------
-            // |       | ~    |  &   |  [   |  ]   |  *   |                                                      |  `   |  7   |  8   |  9   |  @   |       |
+            // |       |      |  |   |  [   |  ]   |  +   |                                                      |  *   |  7   |  8   |  9   |      |       |
             // --------------------------------------------                                                      --------------------------------------------
-            // |       | %    |  !   |  (   |  )   |  =   |                                                      |  0   |  4   |  5   |  6   |  #   |       |
+            // |       | !    |  &   |  (   |  )   |  -   |                                                      |  /   |  4   |  5   |  6   |  ?   |       |
             // -------------------------------------------- -------------------------  ------------------------- --------------------------------------------
-            // |       | ^    |  |   |  {   |  }   |  +   | | trans | trans | trans |  | trans | trans | Del   | |  \   |  1   |  2   |  3   |  $   |       |
+            // |       |      |  ^   |  {   |  }   |  =   | | trans | trans | trans |  | trans | trans | trans | |  0   |  1   |  2   |  3   |  \   |       |
             // -------------------------------------------- -------------------------  ------------------------- --------------------------------------------
             // |       |      |      |      |      |        | trans | trans | trans |  | trans | _     | trans |        |      |      |      |      |       |
             // -------------------------------------        -------------------------  -------------------------        -------------------------------------
 
             bindings = <
-            &none  &none      &none     &none     &none                                                                                &none   &none   &none   &none     &none
-            &none  &none      &none     &none     &none     &none                                                           &none      &none   &none   &none   &none     &none
-            &none  &kp TILDE  &kp AMPS  &kp LBKT  &kp RBKT  &kp ASTRK                                                       &kp GRAVE  &kp N7  &kp N8  &kp N9  &kp AT    &none
-            &none  &kp PRCNT  &kp EXCL  &kp LPAR  &kp RPAR  &kp EQUAL                                                       &kp N0     &kp N4  &kp N5  &kp N6  &kp HASH  &none
-            &none  &kp CARET  &kp PIPE  &kp LBRC  &kp RBRC  &kp PLUS   &trans  &trans  &trans   &trans  &trans     &kp DEL  &kp BSLH   &kp N1  &kp N2  &kp N3  &kp DLLR  &none
-            &none  &none      &none     &none     &none                &trans  &trans  &trans   &trans  &kp UNDER  &trans              &none   &none   &none   &none     &none
+            &none  &none     &none      &none     &none                                                                               &none   &none   &none   &none      &none
+            &none  &none     &none      &none     &none     &none                                                          &none      &none   &none   &none   &none      &none
+            &none  &none     &kp PIPE   &kp LBKT  &kp RBKT  &kp PLUS                                                       &kp ASTRK  &kp N7  &kp N8  &kp N9  &none      &none
+            &none  &kp EXCL  &kp AMPS   &kp LPAR  &kp RPAR  &kp MINUS                                                      &kp FSLH   &kp N4  &kp N5  &kp N6  &kp QMARK  &none
+            &none  &none     &kp CARET  &kp LBRC  &kp RBRC  &kp EQUAL  &trans  &trans  &trans   &trans  &trans     &trans  &kp N0     &kp N1  &kp N2  &kp N3  &kp BSLH   &none
+            &none  &none     &none      &none     &none                &trans  &trans  &trans   &trans  &kp UNDER  &trans             &none   &none   &none   &none      &none
             >;
         };
 

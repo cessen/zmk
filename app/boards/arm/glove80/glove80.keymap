@@ -144,18 +144,18 @@
             // ------------------------------------------------                                                              -----------------------------------------------
             // | ESC   | C    | I    | E      | A      | V    |                                                              | B    | H    | T      | S      | N    | TAB  |
             // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
-            // | # %   | G    | X    | J      | K      | ' "  | | SYM/HK | SUPER |          |  |          | SUPER | NAV/OS | | ; :  | R    | M      | F      | P    | @ $  |
+            // | # %   | G    | X    | J      | K      | ' "  | | RET   | SUPER  |          |  |          | SUPER  | BSPC  | | ; :  | R    | M      | F      | P    | @ $  |
             // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
-            // | MAGIC |      |      |        |        |        | SHIFT  | RET   | CTRL/ALT |  | CTRL/ALT | BSPC  | SPACE  |        |      |        |        |      |      |
+            // | MAGIC |      |      |        |        |        | SHIFT | SYM/HK | CTRL/ALT |  | CTRL/ALT | NAV/OS | SPACE |        |      |        |        |      |      |
             // -----------------------------------------        -----------------------------  -----------------------------        ----------------------------------------
 
             bindings = <
-            &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                       &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
-            &none           &none   &none   &none         &none         &none                                                                      &none     &none       &none         &none         &none   &none
-            &kp GRAVE       &kp Z   &kp Y   &kp O         &kp U         &kp COMMA                                                                  &kp DOT   &kp L       &kp D         &kp W         &kp Q   &kp DEL
-            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp V                                                                      &kp B     &kp H       &kp T         &kp S         &kp N   &kp TAB
-            &hash_perc      &kp G   &kp X   &kp J         &kp K         &kp SQT    &sym_hk   &kp LGUI  &none       &none      &kp LGUI  &nav_os    &kp SEMI  &kp R       &kp M         &kp F         &kp P   &at_dlr
-            &magic MAGIC 0  &none   &none   &none         &none                    &kp LSHFT &kp RET   &ctrl_alt   &ctrl_alt  &kp BSPC  &kp SPACE             &none       &none         &none         &none   &none
+            &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                        &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
+            &none           &none   &none   &none         &none         &none                                                                       &none     &none       &none         &none         &none   &none
+            &kp GRAVE       &kp Z   &kp Y   &kp O         &kp U         &kp COMMA                                                                   &kp DOT   &kp L       &kp D         &kp W         &kp Q   &kp DEL
+            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp V                                                                       &kp B     &kp H       &kp T         &kp S         &kp N   &kp TAB
+            &hash_perc      &kp G   &kp X   &kp J         &kp K         &kp SQT    &kp RET    &kp LGUI  &none       &none      &kp LGUI  &kp BSPC   &kp SEMI  &kp R       &kp M         &kp F         &kp P   &at_dlr
+            &magic MAGIC 0  &none   &none   &none         &none                    &kp LSHFT  &sym_hk   &ctrl_alt   &ctrl_alt  &nav_os   &kp SPACE             &none       &none         &none         &none   &none
             >;
         };
 

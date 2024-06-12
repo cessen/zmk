@@ -15,8 +15,8 @@
 
 // layers
 #define DEFAULT    0
-#define SYMBOLS    1
-#define NAVIGATION 2
+#define NAVIGATION 1
+#define NUMBERS    2
 #define OS         3
 #define HOTKEYS    4
 #define MAGIC      5
@@ -38,7 +38,7 @@
             label = "SYM_NUM_TAP_DANCE";
             #binding-cells = <0>;
             tapping-term-ms = <350>;
-            bindings = <&mo SYMBOLS>, <&mo HOTKEYS>;
+            bindings = <&mo NUMBERS>, <&mo HOTKEYS>;
         };
 
         // Press once for nav layer, twice for os layer.
@@ -59,17 +59,24 @@
             bindings = <&mo>, <&rgb_ug_status_macro>;
         };
 
-        hash_perc: hash_percent {
+        com_semi: comma_semicolon {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp HASH>, <&kp PERCENT>;
+            bindings = <&kp COMMA>, <&kp SEMICOLON>;
             mods = <(MOD_LSFT)>;
         };
 
-        at_dlr: at_dollar {
+        dot_col: dot_colon {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp AT>, <&kp DOLLAR>;
+            bindings = <&kp DOT>, <&kp COLON>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        slsh_min: slash_minus {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp SLASH>, <&kp MINUS>;
             mods = <(MOD_LSFT)>;
         };
     };
@@ -140,85 +147,99 @@
             // ------------------------------------------------                                                              -----------------------------------------------
             // |       |      |      |        |        |      |                                                              |      |      |        |        |      |      |
             // ------------------------------------------------                                                              -----------------------------------------------
-            // | ` ~   | Z    | Y    | O      | U      | , <  |                                                              | . >  | L    | D      | W      | Q    | DEL  |
+            // | ` ~   | Z    | Y    | O      | U      | , ;  |                                                              | . :  | L    | D      | W      | Q    | DEL  |
             // ------------------------------------------------                                                              -----------------------------------------------
             // | ESC   | C    | I    | E      | A      | V    |                                                              | B    | H    | T      | S      | N    | TAB  |
             // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
-            // | # %   | G    | X    | J      | K      | ' "  | | RET   | SUPER  |          |  |          | SUPER  | BSPC  | | ; :  | R    | M      | F      | P    | @ $  |
+            // | # %   | G    | X    | J      | K      | ' "  | | RET   | SUPER  |          |  |          | SUPER  | BSPC  | | / -  | R    | M      | F      | P    | @ $  |
             // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
             // | MAGIC |      |      |        |        |        | SHIFT | SYM/HK | CTRL/ALT |  | CTRL/ALT | NAV/OS | SPACE |        |      |        |        |      |      |
             // -----------------------------------------        -----------------------------  -----------------------------        ----------------------------------------
 
             bindings = <
-            &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                        &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
-            &none           &none   &none   &none         &none         &none                                                                       &none     &none       &none         &none         &none   &none
-            &kp GRAVE       &kp Z   &kp Y   &kp O         &kp U         &kp COMMA                                                                   &kp DOT   &kp L       &kp D         &kp W         &kp Q   &kp DEL
-            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp V                                                                       &kp B     &kp H       &kp T         &kp S         &kp N   &kp TAB
-            &hash_perc      &kp G   &kp X   &kp J         &kp K         &kp SQT    &kp RET    &kp LGUI  &none       &none      &kp LGUI  &kp BSPC   &kp SEMI  &kp R       &kp M         &kp F         &kp P   &at_dlr
+            &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                         &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
+            &none           &none   &none   &none         &none         &none                                                                       &none      &none       &none         &none         &none   &none
+            &kp GRAVE       &kp Z   &kp Y   &kp O         &kp U         &com_semi                                                                   &dot_col   &kp L       &kp D         &kp W         &kp Q   &kp DEL
+            &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp V                                                                       &kp B      &kp H       &kp T         &kp S         &kp N   &kp TAB
+            &none           &kp G   &kp X   &kp J         &kp K         &kp SQT    &kp RET    &kp LGUI  &none       &none      &kp LGUI  &kp BSPC   &slsh_min  &kp R       &kp M         &kp F         &kp P   &none
             &magic MAGIC 0  &none   &none   &none         &none                    &kp LSHFT  &sym_hk   &ctrl_alt   &ctrl_alt  &nav_os   &kp SPACE             &none       &none         &none         &none   &none
             >;
         };
 
-        symbols_layer {
-            // Symbols and numbers.
-            // -------------------------------------                                                                    -------------------------------------
-            // |       |      |      |      |      |                                                                    |      |      |      |      |       |
-            // --------------------------------------------                                                      --------------------------------------------
-            // |       |      |      |      |      |      |                                                      |      |      |      |      |      |       |
-            // --------------------------------------------                                                      --------------------------------------------
-            // |       |      |  |   |  [   |  ]   |  +   |                                                      |  *   |  7   |  8   |  9   |      |       |
-            // --------------------------------------------                                                      --------------------------------------------
-            // |       | !    |  &   |  (   |  )   |  -   |                                                      |  /   |  4   |  5   |  6   |  ?   |       |
-            // -------------------------------------------- -------------------------  ------------------------- --------------------------------------------
-            // |       |      |  ^   |  {   |  }   |  =   | | trans | trans | trans |  | trans | trans | trans | |  0   |  1   |  2   |  3   |  \   |       |
-            // -------------------------------------------- -------------------------  ------------------------- --------------------------------------------
-            // |       |      |      |      |      |        | trans | trans | trans |  | trans | trans | _     |        |      |      |      |      |       |
-            // -------------------------------------        -------------------------  -------------------------        -------------------------------------
+        navigation_layer {
+            // Navigation and left symbols.
+            // -------------------------------------                                                                    ------------------------------------
+            // |       |      |      |      |      |                                                                    |      |     |      |      |       |
+            // --------------------------------------------                                                      -------------------------------------------
+            // |       |      |      |      |      |      |                                                      |      |      |     |      |      |       |
+            // --------------------------------------------                                                      -------------------------------------------
+            // |       |      |  /   |  *   |  <   |  >   |                                                      | PgUp | Home |  ↑  | End  |      |       |
+            // --------------------------------------------                                                      -------------------------------------------
+            // |       | !    |  -   |  +   |  =   |  `   |                                                      | PgDn |   ←  |  ↓  |  →   |      |       |
+            // -------------------------------------------- -------------------------  ------------------------- -------------------------------------------
+            // |       | ~    |  |   |  &   |  ^   |  %   | | trans | trans | trans |  | trans | trans | trans | |      |      |     |      |      |       |
+            // -------------------------------------------- -------------------------  ------------------------- -------------------------------------------
+            // |       |      |      |      |      |        | trans | trans | trans |  | trans | trans | trans |        |      |     |      |      |       |
+            // -------------------------------------        -------------------------  -------------------------        ------------------------------------
 
             bindings = <
-            &none  &none     &none      &none     &none                                                                               &none   &none   &none   &none      &none
-            &none  &none     &none      &none     &none     &none                                                          &none      &none   &none   &none   &none      &none
-            &none  &none     &kp PIPE   &kp LBKT  &kp RBKT  &kp PLUS                                                       &kp ASTRK  &kp N7  &kp N8  &kp N9  &none      &none
-            &none  &kp EXCL  &kp AMPS   &kp LPAR  &kp RPAR  &kp MINUS                                                      &kp FSLH   &kp N4  &kp N5  &kp N6  &kp QMARK  &none
-            &none  &none     &kp CARET  &kp LBRC  &kp RBRC  &kp EQUAL  &trans  &trans  &trans   &trans  &trans  &trans     &kp N0     &kp N1  &kp N2  &kp N3  &kp BSLH   &none
-            &none  &none     &none      &none     &none                &trans  &trans  &trans   &trans  &trans  &kp UNDER             &none   &none   &none   &none      &none
+            &none    &none     &none     &none     &none                                                                            &none      &none     &none      &none  &none
+            &none    &none     &none     &none     &none     &none                                                       &none      &none      &none     &none      &none  &none
+            &none    &none     &kp SLASH &kp ASTRK &kp LT    &kp GT                                                      &kp PG_UP  &kp HOME   &kp UP    &kp END    &none  &none
+            &none    &kp EXCL  &kp MINUS &kp PLUS  &kp EQUAL &kp GRAVE                                                   &kp PG_DN  &kp LEFT   &kp DOWN  &kp RIGHT  &none  &none
+            &none    &kp TILDE &kp PIPE  &kp AMPS  &kp CARET &kp PRCNT &trans  &trans  &trans   &trans  &trans  &trans   &none      &none      &none     &none      &none  &none
+            &none    &none     &none     &none     &none               &trans  &trans  &trans   &trans  &trans  &trans              &none      &none     &none      &none  &none
             >;
         };
 
-        navigation_layer {
-            // Navigation and F-keys.
-            // -------------------------------------                                                                   ------------------------------------
-            // |       |      |      |      |      |                                                                   |      |     |      |      |       |
-            // -------------------------------------------                                                      -------------------------------------------
-            // |       |      |      |      |      |     |                                                      |      |      |     |      |      |       |
-            // -------------------------------------------                                                      -------------------------------------------
-            // |       |  F9  | F10  | F11  | F12  |     |                                                      | PgUp | Home |  ↑  | End  |      |       |
-            // -------------------------------------------                                                      -------------------------------------------
-            // |       |  F5  | F6   | F7   | F8   |     |                                                      | PgDn |   ←  |  ↓  |  →   |      |       |
-            // ------------------------------------------- -------------------------  ------------------------- -------------------------------------------
-            // |       |  F1  | F2   | F3   | F4   |     | | trans | trans | trans |  | trans | trans | trans | |      |      |     |      |      |       |
-            // ------------------------------------------- -------------------------  ------------------------- -------------------------------------------
-            // |       |      |      |      |      |       | trans | trans | trans |  | trans | trans | trans |        |      |     |      |      |       |
-            // -------------------------------------       -------------------------  -------------------------        ------------------------------------
+        numbers_layer {
+            // Numbers and right symbols.
+            // ---------------------------------                                                                  ---------------------------------
+            // |       |     |     |     |     |                                                                  |     |     |     |     |       |
+            // ---------------------------------------                                                      ---------------------------------------
+            // |       |     |     |     |     |     |                                                      |     |     |     |     |     |       |
+            // ---------------------------------------                                                      ---------------------------------------
+            // |       |     |  5  |  4  |  3  |     |                                                      |     |  #  |  [  |  ]  |     |       |
+            // ---------------------------------------                                                      ---------------------------------------
+            // |       |  .  |  2  |  1  |  0  |  9  |                                                      |     |  @  |  (  |  )  |  ?  |       |
+            // --------------------------------------- -------------------------  ------------------------- ---------------------------------------
+            // |       |     |  8  |  7  |  6  |     | | trans | trans | trans |  | trans | trans | trans | |     |  $  |  {  |  }  |  \  |       |
+            // --------------------------------------- -------------------------  ------------------------- ---------------------------------------
+            // |       |     |     |     |     |       | trans | trans | trans |  | trans | trans | _     |       |     |     |     |     |       |
+            // ---------------------------------       -------------------------  -------------------------       ---------------------------------
 
             bindings = <
-            &none    &none   &none    &none    &none                                                                          &none      &none     &none      &none  &none
-            &none    &none   &none    &none    &none    &none                                                      &none      &none      &none     &none      &none  &none
-            &none    &kp F9  &kp F10  &kp F11  &kp F12  &none                                                      &kp PG_UP  &kp HOME   &kp UP    &kp END    &none  &none
-            &none    &kp F5  &kp F6   &kp F7   &kp F8   &none                                                      &kp PG_DN  &kp LEFT   &kp DOWN  &kp RIGHT  &none  &none
-            &none    &kp F1  &kp F2   &kp F3   &kp F4   &none    &trans  &trans  &trans   &trans  &trans  &trans   &none      &none      &none     &none      &none  &none
-            &none    &none   &none    &none    &none             &trans  &trans  &trans   &trans  &trans  &trans              &none      &none     &none      &none  &none
+            &none  &none    &none      &none     &none                                                                          &none     &none     &none     &none      &none
+            &none  &none    &none      &none     &none     &none                                                         &none  &none     &none     &none     &none      &none
+            &none  &none    &kp N5     &kp N4    &kp N3    &none                                                         &none  &kp HASH  &kp LBKT  &kp RBKT  &none      &none
+            &none  &kp DOT  &kp N2     &kp N1    &kp N0    &kp N9                                                        &none  &kp AT    &kp LPAR  &kp RPAR  &kp QMARK  &none
+            &none  &none    &kp N8     &kp N7    &kp N6    &none    &trans  &trans  &trans   &trans  &trans  &trans      &none  &kp DLLR  &kp LBRC  &kp RBRC  &kp BSLH   &none
+            &none  &none    &none      &none     &none              &trans  &trans  &trans   &trans  &trans  &kp UNDER          &none     &none     &none     &none      &none
             >;
         };
 
         os_layer {
+             // --------------------------------------                                                                    ------------------------------------
+             // |        |      |      |      |      |                                                                    | Ins  | Prnt | SLck | Paus | Caps |
+             // ---------------------------------------------                                                      -------------------------------------------
+             // |        |      |      |      |      |      |                                                      |      |      |      |      |      |      |
+             // ---------------------------------------------                                                      -------------------------------------------
+             // |        |      |      |      | Lang | Mntr |                                                      | W Up | W L  | D Up | W R  |      |      |
+             // ---------------------------------------------                                                      -------------------------------------------
+             // | Shtdwn |      |      | File | Run  | Term |                                                      | W Dn | D L  | D Dn | D R  |      |      |
+             // --------------------------------------------- -------------------------  ------------------------- -------------------------------------------
+             // | F1     | F2   | F3   | F4   | F5   | F6   | | trans | trans | trans |  | trans | trans | trans | | F12  | F11  | F10  | F9   | F8   | F7   |
+             // --------------------------------------------- -------------------------  ------------------------- -------------------------------------------
+             // |        |      |      |      |      |        | trans | trans | trans |  | trans | trans | trans |        |      |      |      |      |      |
+             // --------------------------------------        -------------------------  -------------------------        ------------------------------------
+
              bindings = <
-             &none        &none   &none  &none      &none                                                                                              &kp INS           &kp PSCRN     &kp SLCK           &kp PAUSE_BREAK  &kp CAPS
-             &none        &none   &none  &none      &none          &none                                                             &none             &none             &none         &none              &none            &none
-             &none        &none   &none  &none      &kp LG(SPACE)  &kp LC(LA(DEL))                                                   &kp LS(LG(UP))    &kp LS(LG(LEFT))  &kp LG(UP)    &kp LS(LG(RIGHT))  &none            &none
-             &kp LG(ESC)  &none   &none  &kp LG(E)  &kp LG(R)      &kp LG(T)                                                         &kp LS(LG(DOWN))  &kp LG(LEFT)      &kp LG(DOWN)  &kp LG(RIGHT)      &none            &kp LG(BSPC)
-             &none        &none   &none  &none      &none          &none            &trans  &trans  &trans   &trans  &trans  &trans  &none             &none             &none         &none              &none            &none
-             &none        &none   &none  &none      &none                           &trans  &trans  &trans   &trans  &trans  &trans                    &none             &none         &none              &none            &none
+             &none        &none   &none   &none      &none                                                                                              &kp INS           &kp PSCRN     &kp SLCK           &kp PAUSE_BREAK  &kp CAPS
+             &none        &none   &none   &none      &none          &none                                                             &none             &none             &none         &none              &none            &none
+             &none        &none   &none   &none      &kp LG(SPACE)  &kp LC(LA(DEL))                                                   &kp LS(LG(UP))    &kp LS(LG(LEFT))  &kp LG(UP)    &kp LS(LG(RIGHT))  &none            &none
+             &kp LG(ESC)  &none   &none   &kp LG(E)  &kp LG(R)      &kp LG(T)                                                         &kp LS(LG(DOWN))  &kp LG(LEFT)      &kp LG(DOWN)  &kp LG(RIGHT)      &none            &kp LG(BSPC)
+             &kp F1       &kp F2  &kp F3  &kp F4     &kp F5         &kp F6           &trans  &trans  &trans   &trans  &trans  &trans  &kp F12           &kp F11           &kp F10       &kp F9             &kp F8           &kp F7
+             &none        &none   &none   &none      &none                           &trans  &trans  &trans   &trans  &trans  &trans                    &none             &none         &none              &none            &none
              >;
         };
 

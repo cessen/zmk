@@ -33,8 +33,17 @@ behaviors {
         bindings = <&kp LCTRL>, <&kp LALT>, <&ctrl_and_alt>;
     };
 
+    // Press once for shift, twice for word caps.
+    shft_cw: tap_dance_1 {
+        compatible = "zmk,behavior-tap-dance";
+        label = "NAV_OS_TAP_DANCE";
+        #binding-cells = <0>;
+        tapping-term-ms = <350>;
+        bindings = <&kp LSHFT>, <&caps_word>;
+    };
+
     // Press once for symbol/num layer, twice for hotkey layer.
-    sym_hk: tap_dance_1 {
+    sym_hk: tap_dance_2 {
         compatible = "zmk,behavior-tap-dance";
         label = "SYM_NUM_TAP_DANCE";
         #binding-cells = <0>;
@@ -43,7 +52,7 @@ behaviors {
     };
 
     // Press once for nav layer, twice for os layer.
-    nav_os: tap_dance_2 {
+    nav_os: tap_dance_3 {
         compatible = "zmk,behavior-tap-dance";
         label = "NAV_OS_TAP_DANCE";
         #binding-cells = <0>;
@@ -167,18 +176,18 @@ default_layer {
     // ------------------------------------------------                                                              -----------------------------------------------
     // | ESC   | C    | I    | E      | A      | V    |                                                              | B    | H    | T      | S      | N    | TAB  |
     // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
-    // |       | G    | X    | J      | K      | ,    | | RET    | RET   | SUPER    |  | SUPER    | BSPC  | BSPC   | | .    | R    | M      | F      | P    |      |
+    // |       | G    | X    | J      | K      | .    | | RET    | RET   | SUPER    |  | SUPER    | BSPC  | BSPC   | | ,    | R    | M      | F      | P    |      |
     // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
     // | MAGIC |      |      |        |        |        | SYM/HK | SHIFT | CTRL/ALT |  | CTRL/ALT | SPACE | NAV/OS |        |      |        |        |      |      |
     // -----------------------------------------        -----------------------------  -----------------------------        ----------------------------------------
 
     bindings = <
-    &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                         &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
-    &none           &none   &none   &none         &none         &none                                                                       &none      &none       &none         &none         &none   &none
-    &kp GRAVE       &kp Z   &kp Y   &kp O         &kp U         &quote                                                                      &kp UNDER  &kp L       &kp D         &kp W         &kp Q   &kp DEL
-    &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp V                                                                       &kp B      &kp H       &kp T         &kp S         &kp N   &kp TAB
-    &none           &kp G   &kp X   &kp J         &kp K         &comma     &kp RET  &kp RET    &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &dot       &kp R       &kp M         &kp F         &kp P   &none
-    &magic MAGIC 0  &none   &none   &none         &none                    &sym_hk  &kp LSHFT  &ctrl_alt   &ctrl_alt  &kp SPACE  &nav_os               &none       &none         &none         &none   &none
+    &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                        &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
+    &none           &none   &none   &none         &none         &none                                                                      &none      &none       &none         &none         &none   &none
+    &kp GRAVE       &kp Z   &kp Y   &kp O         &kp U         &quote                                                                     &kp UNDER  &kp L       &kp D         &kp W         &kp Q   &kp DEL
+    &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp V                                                                      &kp B      &kp H       &kp T         &kp S         &kp N   &kp TAB
+    &none           &kp G   &kp X   &kp J         &kp K         &dot       &kp RET  &kp RET   &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &comma     &kp R       &kp M         &kp F         &kp P   &none
+    &magic MAGIC 0  &none   &none   &none         &none                    &sym_hk  &shft_cw  &ctrl_alt   &ctrl_alt  &kp SPACE  &nav_os               &none       &none         &none         &none   &none
     >;
 };
 
@@ -219,7 +228,7 @@ numbers_layer {
     // ---------------------------------------                                                      ---------------------------------------
     // |       |  .  |  2  |  1  |  0  |  9  |                                                      |  !  |  "  |  (  |  )  |  ;  |       |
     // --------------------------------------- -------------------------  ------------------------- ---------------------------------------
-    // |       |     |  8  |  7  |  6  |     | | trans | trans | trans |  | trans | trans | trans | |  ?  |  @  |  {  |  }  |  \  |       |
+    // |       |  -  |  8  |  7  |  6  |     | | trans | trans | trans |  | trans | trans | trans | |  ?  |  @  |  {  |  }  |  \  |       |
     // --------------------------------------- -------------------------  ------------------------- ---------------------------------------
     // |       |     |     |     |     |       | trans | trans | trans |  | trans | trans | trans |       |     |     |     |     |       |
     // ---------------------------------       -------------------------  -------------------------       ---------------------------------
@@ -229,7 +238,7 @@ numbers_layer {
     &none  &none    &none      &none     &none     &none                                                         &none     &none     &none     &none     &none     &none
     &none  &none    &kp N5     &kp N4    &kp N3    &none                                                         &kp DLLR  &kp HASH  &kp LBKT  &kp RBKT  &none     &none
     &none  &kp DOT  &kp N2     &kp N1    &kp N0    &kp N9                                                        &kp EXCL  &kp DQT   &kp LPAR  &kp RPAR  &kp SEMI  &none
-    &none  &none    &kp N8     &kp N7    &kp N6    &none    &trans  &trans  &trans   &trans  &trans  &trans      &kp QMARK &kp AT    &kp LBRC  &kp RBRC  &kp BSLH  &none
+    &none  &minus   &kp N8     &kp N7    &kp N6    &none    &trans  &trans  &trans   &trans  &trans  &trans      &kp QMARK &kp AT    &kp LBRC  &kp RBRC  &kp BSLH  &none
     &none  &none    &none      &none     &none              &trans  &trans  &trans   &trans  &trans  &trans                &none     &none     &none     &none     &none
     >;
 };

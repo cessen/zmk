@@ -198,22 +198,22 @@ navigation_layer {
     // --------------------------------------------                                                      -------------------------------------------
     // |       |      |      |      |      |      |                                                      |      |      |     |      |      |       |
     // --------------------------------------------                                                      -------------------------------------------
-    // |       |      |  *   |  /   |  >   |  <   |                                                      | PgUp | Home |  ↑  | End  |      |       |
+    // |       |      |  *   |  /   |  ^   |  `   |                                                      | PgUp | Home |  ↑  | End  |      |       |
     // --------------------------------------------                                                      -------------------------------------------
-    // |       | :    |  +   |  -   |  =   |  `   |                                                      | PgDn |   ←  |  ↓  |  →   |      |       |
+    // |       | :    |  +   |  -   |  =   |  &   |                                                      | PgDn |   ←  |  ↓  |  →   |      |       |
     // -------------------------------------------- -------------------------  ------------------------- -------------------------------------------
-    // |       | ~    |  |   |  &   |  ^   |  %   | | trans | trans | trans |  | trans | trans | trans | |      |      |     |      |      |       |
+    // |       | ~    |  |   |  <   |  >   |  %   | | trans | trans | trans |  | trans | trans | trans | |      |      |     |      |      |       |
     // -------------------------------------------- -------------------------  ------------------------- -------------------------------------------
     // |       |      |      |      |      |        | trans | trans | trans |  | trans | trans | trans |        |      |     |      |      |       |
     // -------------------------------------        -------------------------  -------------------------        ------------------------------------
 
     bindings = <
-    &none    &none     &none     &none     &none                                                                            &none      &none     &none      &none  &none
-    &none    &none     &none     &none     &none     &none                                                       &none      &none      &none     &none      &none  &none
-    &none    &none     &kp ASTRK &slash    &kp GT    &kp LT                                                      &kp PG_UP  &kp HOME   &kp UP    &kp END    &none  &none
-    &none    &kp COLON &kp PLUS  &minus    &kp EQUAL &kp GRAVE                                                   &kp PG_DN  &kp LEFT   &kp DOWN  &kp RIGHT  &none  &none
-    &none    &kp TILDE &kp PIPE  &kp AMPS  &kp CARET &kp PRCNT &trans  &trans  &trans   &trans  &trans  &trans   &none      &none      &none     &none      &none  &none
-    &none    &none     &none     &none     &none               &trans  &trans  &trans   &trans  &trans  &trans              &none      &none     &none      &none  &none
+    &none    &none     &none     &none   &none                                                                             &none      &none     &none      &none  &none
+    &none    &none     &none     &none   &none      &none                                                       &none      &none      &none     &none      &none  &none
+    &none    &none     &kp ASTRK &slash  &kp CARET  &kp GRAVE                                                   &kp PG_UP  &kp HOME   &kp UP    &kp END    &none  &none
+    &none    &kp COLON &kp PLUS  &minus  &kp EQUAL  &kp AMPS                                                    &kp PG_DN  &kp LEFT   &kp DOWN  &kp RIGHT  &none  &none
+    &none    &kp TILDE &kp PIPE  &kp LT  &kp GT     &kp PRCNT &trans  &trans  &trans   &trans  &trans  &trans   &none      &none      &none     &none      &none  &none
+    &none    &none     &none     &none   &none                &trans  &trans  &trans   &trans  &trans  &trans              &none      &none     &none      &none  &none
     >;
 };
 

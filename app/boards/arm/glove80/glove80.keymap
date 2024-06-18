@@ -172,22 +172,22 @@ default_layer {
     // ------------------------------------------------                                                              -----------------------------------------------
     // |       |      |      |        |        |      |                                                              |      |      |        |        |      |      |
     // ------------------------------------------------                                                              -----------------------------------------------
-    // |       | Z    | Y    | O      | U      | .    |                                                              | ,    | L    | D      | W      | Q    | DEL  |
+    // |       | Z    | Y    | O      | U      | '    |                                                              | .    | L    | D      | W      | Q    | DEL  |
     // ------------------------------------------------                                                              -----------------------------------------------
     // | ESC   | C    | I    | E      | A      | V    |                                                              | B    | H    | T      | S      | N    | TAB  |
     // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
-    // |       | G    | X    | J      | K      | '    | | RET    | RET   | SUPER    |  | SUPER    | BSPC  | BSPC   | | _    | R    | M      | F      | P    |      |
+    // |       | G    | X    | J      | K      | _    | | RET    | RET   | SUPER    |  | SUPER    | BSPC  | BSPC   | | ,    | R    | M      | F      | P    |      |
     // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
     // | MAGIC |      |      |        |        |        | SYM/HK | SHIFT | CTRL/ALT |  | CTRL/ALT | SPACE | NAV/OS |        |      |        |        |      |      |
     // -----------------------------------------        -----------------------------  -----------------------------        ----------------------------------------
 
     bindings = <
-    &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                        &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
-    &none           &none   &none   &none         &none         &none                                                                      &none      &none       &none         &none         &none   &none
-    &kp GRAVE       &kp Z   &kp Y   &kp O         &kp U         &dot                                                                       &comma     &kp L       &kp D         &kp W         &kp Q   &kp DEL
-    &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp V                                                                      &kp B      &kp H       &kp T         &kp S         &kp N   &kp TAB
-    &none           &kp G   &kp X   &kp J         &kp K         &quote     &kp RET  &kp RET   &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &kp UNDER  &kp R       &kp M         &kp F         &kp P   &none
-    &magic MAGIC 0  &none   &none   &none         &none                    &sym_hk  &shft_cw  &ctrl_alt   &ctrl_alt  &kp SPACE  &nav_os               &none       &none         &none         &none   &none
+    &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                     &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
+    &none           &none   &none   &none         &none         &none                                                                      &none   &none       &none         &none         &none   &none
+    &kp GRAVE       &kp Z   &kp Y   &kp O         &kp U         &quote                                                                     &dot    &kp L       &kp D         &kp W         &kp Q   &kp DEL
+    &kp ESC         &kp C   &kp I   &kp E         &kp A         &kp V                                                                      &kp B   &kp H       &kp T         &kp S         &kp N   &kp TAB
+    &none           &kp G   &kp X   &kp J         &kp K         &kp UNDER  &kp RET  &kp RET   &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &comma  &kp R       &kp M         &kp F         &kp P   &none
+    &magic MAGIC 0  &none   &none   &none         &none                    &sym_hk  &shft_cw  &ctrl_alt   &ctrl_alt  &kp SPACE  &nav_os            &none       &none         &none         &none   &none
     >;
 };
 
@@ -198,11 +198,11 @@ navigation_layer {
     // --------------------------------------------                                                      -------------------------------------------
     // |       |      |      |      |      |      |                                                      |      |      |     |      |      |       |
     // --------------------------------------------                                                      -------------------------------------------
-    // |       |      |  *   |  /   |  ^   |  `   |                                                      | PgUp | Home |  ↑  | End  |      |       |
+    // |       |      |  *   |  /   |  ^   |  %   |                                                      | PgUp | Home |  ↑  | End  |      |       |
     // --------------------------------------------                                                      -------------------------------------------
     // |       | :    |  +   |  -   |  =   |  &   |                                                      | PgDn |   ←  |  ↓  |  →   |      |       |
     // -------------------------------------------- -------------------------  ------------------------- -------------------------------------------
-    // |       | ~    |  |   |  <   |  >   |  %   | | trans | trans | trans |  | trans | trans | trans | |      |      |     |      |      |       |
+    // |       | ~    |  |   |  <   |  >   |  `   | | trans | trans | trans |  | trans | trans | trans | |      |      |     |      |      |       |
     // -------------------------------------------- -------------------------  ------------------------- -------------------------------------------
     // |       |      |      |      |      |        | trans | trans | trans |  | trans | trans | trans |        |      |     |      |      |       |
     // -------------------------------------        -------------------------  -------------------------        ------------------------------------
@@ -210,9 +210,9 @@ navigation_layer {
     bindings = <
     &none    &none     &none     &none   &none                                                                             &none      &none     &none      &none  &none
     &none    &none     &none     &none   &none      &none                                                       &none      &none      &none     &none      &none  &none
-    &none    &none     &kp ASTRK &slash  &kp CARET  &kp GRAVE                                                   &kp PG_UP  &kp HOME   &kp UP    &kp END    &none  &none
+    &none    &none     &kp ASTRK &slash  &kp CARET  &kp PRCNT                                                   &kp PG_UP  &kp HOME   &kp UP    &kp END    &none  &none
     &none    &kp COLON &kp PLUS  &minus  &kp EQUAL  &kp AMPS                                                    &kp PG_DN  &kp LEFT   &kp DOWN  &kp RIGHT  &none  &none
-    &none    &kp TILDE &kp PIPE  &kp LT  &kp GT     &kp PRCNT &trans  &trans  &trans   &trans  &trans  &trans   &none      &none      &none     &none      &none  &none
+    &none    &kp TILDE &kp PIPE  &kp LT  &kp GT     &kp GRAVE &trans  &trans  &trans   &trans  &trans  &trans   &none      &none      &none     &none      &none  &none
     &none    &none     &none     &none   &none                &trans  &trans  &trans   &trans  &trans  &trans              &none      &none     &none      &none  &none
     >;
 };

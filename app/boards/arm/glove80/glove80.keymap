@@ -176,7 +176,7 @@ default_layer {
     // ------------------------------------------------                                                              -----------------------------------------------
     // | ESC   | C    | I    | E      | A      | '    |                                                              | B    | H    | T      | S      | N    | V    |
     // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
-    // | TAB   | G    | X    | J      | K      | _    | | RET    | RET   | SUPER    |  | SUPER    | BSPC  | BSPC   | | .    | R    | M      | F      | P    |      |
+    // | TAB   | G    | X    | J      | K      | _    | | RET    | RET   | SUPER    |  | SUPER    | BSPC  | BSPC   | | .    | R    | M      | F      | P    | TAB  |
     // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
     // | MAGIC |      |      |        |        |        | SYM/HK | SHIFT | CTRL/ALT |  | CTRL/ALT | SPACE | NAV/OS |        |      |        |        |      |      |
     // -----------------------------------------        -----------------------------  -----------------------------        ----------------------------------------
@@ -186,7 +186,7 @@ default_layer {
     &none           &none   &none   &none         &none         &none                                                                      &none   &none       &none         &none         &none   &none
     &kp TAB         &kp Z   &kp Y   &kp O         &kp U         &kp SEMI                                                                   &comma  &kp L       &kp D         &kp W         &kp Q   &kp DEL
     &kp ESC         &kp C   &kp I   &kp E         &kp A         &quote                                                                     &kp B   &kp H       &kp T         &kp S         &kp N   &kp V
-    &kp TAB         &kp G   &kp X   &kp J         &kp K         &kp UNDER  &kp RET  &kp RET   &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &dot    &kp R       &kp M         &kp F         &kp P   &none
+    &kp TAB         &kp G   &kp X   &kp J         &kp K         &kp UNDER  &kp RET  &kp RET   &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &dot    &kp R       &kp M         &kp F         &kp P   &kp TAB
     &magic MAGIC 0  &none   &none   &none         &none                    &sym_hk  &shft_cw  &ctrl_alt   &ctrl_alt  &kp SPACE  &nav_os            &none       &none         &none         &none   &none
     >;
 };

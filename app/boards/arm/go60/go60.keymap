@@ -278,24 +278,24 @@
 
         lay_hk {
             // Hotkeys.
-            // -----------------------------------------------                                    -----------------------------------------------
-            // |     | trans | trans | trans | trans | trans |                                    | trans | trans | trans | trans | trans |     |
-            // -----------------------------------------------                                    -----------------------------------------------
-            // |     |       |       |       |       |       |                                    |       |       |       |       |       |     |
-            // -----------------------------------------------                                    -----------------------------------------------
-            // |     |       |       |       |       |       |                                    |       |       |       |       |       |     |
-            // -----------------------------------------------                                    -----------------------------------------------
-            // |     |       |       |       |       |       |                                    |       |       |       |       |       |     |
-            // ---------------------------------------------------------------    -------------------------------------------------
-            //               | trans | trans | trans | trans | trans | trans |    | trans | trans | trans | trans | trans | trans |
-            //               -------------------------------------------------    -------------------------------------------------
+            // -------------------------------------------------------------                                    -----------------------------------------------
+            // |     | trans | trans  |    trans    |    trans    | trans  |                                    | trans | trans | trans | trans | trans |     |
+            // -------------------------------------------------------------                                    -----------------------------------------------
+            // |     |       |        | Shft-Ctrl-C | Shft-Ctrl-V |        |                                    |       |       |       |       |       |     |
+            // -------------------------------------------------------------                                    -----------------------------------------------
+            // |     |       | Ctrl-X |   Ctrl-C    |   Ctrl-V    | Ctrl-Z |                                    |       |       |       |       |       |     |
+            // -------------------------------------------------------------                                    -----------------------------------------------
+            // |     |       |        |             |             |        |                                    |       |       |       |       |       |     |
+            // -----------------------------------------------------------------------------    -------------------------------------------------
+            //               | trans  |    trans    |    trans    | trans  | trans | trans |    | trans | trans | trans | trans | trans | trans |
+            //               ---------------------------------------------------------------    -------------------------------------------------
             bindings = <
-            &none   &trans   &trans   &trans   &trans   &trans                                         &trans   &trans   &trans   &trans   &trans   &none
-            &none   &none    &none    &none    &none    &none                                          &none    &none    &none    &none    &none    &none
-            &none   &none    &none    &none    &none    &none                                          &none    &none    &none    &none    &none    &none
-            &none   &none    &none    &none    &none    &none                                          &none    &none    &none    &none    &none    &none
-                             &none    &none    &none                                                            &none    &none    &none
-                                                        &trans   &trans   &trans     &trans   &trans   &trans
+            &none   &trans   &trans      &trans          &trans          &trans                                         &trans   &trans   &trans   &trans   &trans   &none
+            &none   &none    &none       &kp LS(LC(C))   &kp LS(LC(V))   &none                                          &none    &none    &none    &none    &none    &none
+            &none   &none    &kp LC(X)   &kp LC(C)       &kp LC(V)       &kp LC(Z)                                      &none    &none    &none    &none    &none    &none
+            &none   &none    &none       &none           &none           &none                                          &none    &none    &none    &none    &none    &none
+                             &none       &none           &none                                                                   &none    &none    &none
+                                                                         &trans   &trans   &trans     &trans   &trans   &trans
             >;
         };
 

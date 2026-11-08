@@ -18,12 +18,13 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
 // layers
-#define LAY_def 0  // Default
-#define LAY_nav 1
-#define LAY_num 2
-#define LAY_os  1
-#define LAY_hk  2  // Hotkeys
-#define LAY_mag 3  // Magic
+#define LAY_def    0  // Default
+#define LAY_nav    1
+#define LAY_num    2
+#define LAY_os     3
+#define LAY_hk     4  // Hotkeys
+#define LAY_blen1  5  // Blender Layer 1
+#define LAY_mag    6  // Magic
 
 / {
     input_processors {
@@ -298,6 +299,33 @@
                                                                          &trans   &trans   &trans     &trans   &trans   &trans
             >;
         };
+
+        //======================================================
+
+        lay_blen1 {
+            // A layout specifically for using Blender.
+            // ----------------------------------------------                                  ---------------------------------------------
+            // | Magic |      |      |      |      |        |                                  |        |      |      |      |      |      |
+            // ----------------------------------------------                                  ---------------------------------------------
+            // |       |      |      |      |      |        |                                  | ,      | L    | D    | W    | Q    | TAB  |
+            // ----------------------------------------------                                  ---------------------------------------------
+            // |  ESC  | TAB  |  S   |  R   |  G   |  RET   |                                  | B      | H    | T    | S    | N    | V    |
+            // ----------------------------------------------                                  ---------------------------------------------
+            // |       | ALT  |  X   |  Y   |  Z   |        |                                  | .      | R    | M    | F    | P    | DEL  |
+            // -------------------------------------------------------------    ------------------------------------------------------------
+            //                |      |      |      | SYM/HK | SHIFT | CTRL |    | BSPC | SPACE | NAV/OS |      |      |      |
+            //                ----------------------------------------------    ----------------------------------------------
+            bindings = <
+            &magic LAY_mag 0   &none   &kp LSHFT   &kp LCTRL   &kp LALT   &kp LGUI                                                 &kp LGUI   &kp RALT   &kp RCTRL   &kp RSHFT   &none   &none
+            &kp TAB            &kp Z   &kp Y       &kp O       &kp U      &slash                                                   &comma     &kp L      &kp D       &kp W       &kp Q   &kp TAB
+            &kp ESC            &kp C   &kp I       &kp E       &kp A      &quote                                                   &kp B      &kp H      &kp T       &kp S       &kp N   &kp V
+            &kp TAB            &kp G   &kp X       &kp J       &kp K      &kp UNDER                                                &dot       &kp R      &kp M       &kp F       &kp P   &kp DEL
+                                       &none       &none       &none                                                                          &none      &none       &none
+                                                                          &sym_hk   &kp LSHFT   &kp RET     &kp BSPC   &kp SPACE   &nav_os
+            >;
+        };
+
+        //======================================================
 
         lay_mag {
             bindings = <

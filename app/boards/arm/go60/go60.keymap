@@ -21,6 +21,8 @@
 #define LAY_def 0  // Default
 #define LAY_nav 1
 #define LAY_num 2
+#define LAY_os  1
+#define LAY_hk  2  // Hotkeys
 #define LAY_mag 3  // Magic
 
 / {
@@ -40,20 +42,6 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             bindings = <&mo>, <&rgb_ug_status_macro>;
-        };
-
-        keypad_td: keypad_td {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&mo LAY_num>, <&to LAY_num>;
-        };
-
-        symbol_nav_td: symbol_nav_td {
-            compatible = "zmk,behavior-tap-dance";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&mo LAY_nav>, <&to LAY_nav>;
         };
 
         bt_0: bt_0 {
@@ -79,6 +67,80 @@
             #binding-cells = <0>;
             tapping-term-ms = <200>;
             bindings = <&bt_select_3>, <&bt BT_DISC 3>;
+        };
+
+        //-----------
+        // Cessen
+
+//        // Press once for ctrl, twice for alt, thrice for ctrl+alt.
+//        ctrl_alt: tap_dance_0 {
+//            compatible = "zmk,behavior-tap-dance";
+//            label = "CTRL_ALT_TAP_DANCE";
+//            #binding-cells = <0>;
+//            tapping-term-ms = <350>;
+//            bindings = <&kp LCTRL>, <&kp LALT>, <&ctrl_and_alt>;
+//        };
+//
+        // Press once for shift, twice for word caps.
+        shft_cw: tap_dance_1 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "SHIFT_CAPS_WORD_TAP_DANCE";
+            #binding-cells = <0>;
+            tapping-term-ms = <350>;
+            bindings = <&kp LSHFT>, <&caps_word>;
+        };
+
+        // Press once for symbol/num layer, twice for hotkey layer.
+        sym_hk: tap_dance_2 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "SYM_HOTKEY_TAP_DANCE";
+            #binding-cells = <0>;
+            tapping-term-ms = <350>;
+            bindings = <&mo LAY_num>, <&mo LAY_hk>;
+        };
+
+        // Press once for nav layer, twice for os layer.
+        nav_os: tap_dance_3 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "NAV_OS_TAP_DANCE";
+            #binding-cells = <0>;
+            tapping-term-ms = <350>;
+            bindings = <&mo LAY_nav>, <&mo LAY_os>;
+        };
+
+        comma: comma_non_shifting {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp COMMA>, <&kp COMMA>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        dot: dot_non_shifting {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp DOT>, <&kp DOT>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        quote: quote_non_shifting {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp SQT>, <&kp SQT>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        minus: minus_non_shifting {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp MINUS>, <&kp MINUS>;
+            mods = <(MOD_LSFT)>;
+        };
+
+        slash: slash_non_shifting {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp SLASH>, <&kp SLASH>;
+            mods = <(MOD_LSFT)>;
         };
     };
 
@@ -124,46 +186,116 @@
 
         lay_def {
             // A modified Engram layout.
-            // ------------------------------------------------                                            -----------------------------------------------
-            // |       |      |      |        |        |        |                                          |        |      |        |        |      |      |
-            // ------------------------------------------------                                            -----------------------------------------------
-            // | TAB   | Z    | Y    | O      | U      | /      |                                          | ,      | L    | D      | W      | Q    | TAB  |
-            // ------------------------------------------------                                            -----------------------------------------------
-            // | ESC   | C    | I    | E      | A      | '      |                                          | B      | H    | T      | S      | N    | V    |
-            // ------------------------------------------------                                            -----------------------------------------------
-            // | TAB   | G    | X    | J      | K      | _      |                                          | .      | R    | M      | F      | P    | DEL  |
-            // ---------------------------------------------------------------------    --------------------------------------------------------------------
-            //                |      |        |        | SYM/HK | SHIFT | CTRL/ALT |    | CTRL/ALT | SPACE | NAV/OS |      |        |        |
-            //                ------------------------------------------------------    ------------------------------------------------------
+            // ----------------------------------------------                                 ---------------------------------------------
+            // | Magic |      | SHFT | CTRL | ALT  | SUPER  |                                 | SUPER  | ALT  | CTRL | SHFT |      |      |
+            // ----------------------------------------------                                 ---------------------------------------------
+            // | TAB   | Z    | Y    | O    | U    | /      |                                 | ,      | L    | D    | W    | Q    | TAB  |
+            // ----------------------------------------------                                 ---------------------------------------------
+            // | ESC   | C    | I    | E    | A    | '      |                                 | B      | H    | T    | S    | N    | V    |
+            // ----------------------------------------------                                 ---------------------------------------------
+            // | TAB   | G    | X    | J    | K    | _      |                                 | .      | R    | M    | F    | P    | DEL  |
+            // ------------------------------------------------------------    ------------------------------------------------------------
+            //                |      |      |      | SYM/HK | SHIFT | RET |    | BSPC | SPACE | NAV/OS |      |      |      |
+            //                ---------------------------------------------    ----------------------------------------------
             bindings = <
-            &kp TAB            &none   &none      &none    &none    &none                                                         &none         &none      &none     &none     &none    &none
-            &kp ESC            &kp Q   &kp W      &kp E    &kp R    &kp T                                                         &kp Y         &kp U      &kp I     &kp O     &kp P    &kp BSLH
-            &kp TAB            &kp A   &kp S      &kp D    &kp F    &kp G                                                         &kp H         &kp J      &kp K     &kp L  &kp SEMI     &kp SQT
-            &magic LAY_mag 0   &kp Z   &kp X      &kp C    &kp V    &kp B                                                         &kp N         &kp M  &kp COMMA   &kp DOT  &kp FSLH  &keypad_td
-                                       &kp GRAVE  &kp DEL  &kp BSPC                                                                             &kp LGUI   &kp LBKT  &kp RBKT
-                                                                    &symbol_nav_td  &kp LSHFT  &kp LCTRL     &kp LALT  &kp SPACE  &mt RALT RET
+            &magic LAY_mag 0   &none   &kp LSHFT   &kp LCTRL   &kp LALT   &kp LGUI                                                 &kp LGUI   &kp RALT   &kp RCTRL   &kp RSHFT   &none   &none
+            &kp TAB            &kp Z   &kp Y       &kp O       &kp U      &slash                                                   &comma     &kp L      &kp D       &kp W       &kp Q   &kp TAB
+            &kp ESC            &kp C   &kp I       &kp E       &kp A      &quote                                                   &kp B      &kp H      &kp T       &kp S       &kp N   &kp V
+            &kp TAB            &kp G   &kp X       &kp J       &kp K      &kp UNDER                                                &dot       &kp R      &kp M       &kp F       &kp P   &kp DEL
+                                       &none       &none       &none                                                                          &none      &none       &none
+                                                                          &sym_hk   &kp LSHFT   &kp RET     &kp BSPC   &kp SPACE   &nav_os
             >;
         };
 
         lay_nav {
+            // Navigation and left symbols.
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------------------    -------------------------------------------------
+            //             |     |     |     |     |     |     |    |     |     |     |     |     |     |
+            //             -------------------------------------    -------------------------------------
             bindings = <
-              &kp INS    &kp F1     &kp F2    &kp F3     &kp F4     &kp F5                                       &kp F6    &kp F7           &kp F8       &kp F9          &kp F10    &kp F11
-             &kp SLCK  &kp EXCL   &kp HOME    &kp UP    &kp END  &kp PG_UP                                     &kp LPAR  &kp RPAR           &kp UP    &kp PRCNT        &kp K_APP    &kp F12
-             &kp CAPS    &kp AT   &kp LEFT  &kp DOWN  &kp RIGHT  &kp PG_DN                                     &kp DLLR  &kp LEFT         &kp DOWN    &kp RIGHT  &kp PAUSE_BREAK  &kp PSCRN
- &magic LAY_mag 0  &kp HASH   &kp LBKT  &kp RBKT   &kp LBRC   &kp RBRC                                     &kp AMPS  &kp STAR        &kp UNDER     &kp PLUS        &kp LSHFT  &kp LCTRL
-                                 &kp CARET    &trans     &trans                                                            &trans  &kp LC(LS(TAB))  &kp LC(TAB)
-                                                            &to LAY_def  &trans  &trans       &trans  &trans  &trans
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+                            &none   &none   &none                                                 &none   &none   &none
+                                                    &none  &none  &none     &none  &none  &none
             >;
         };
 
         lay_num {
+            // Numbers and right symbols.
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------------------    -------------------------------------------------
+            //             |     |     |     |     |     |     |    |     |     |     |     |     |     |
+            //             -------------------------------------    -------------------------------------
             bindings = <
-                &none     &kp F1     &kp F2     &kp F3     &kp F4         &kp F5                                                 &kp F6     &kp F7      &kp F8        &kp F9          &kp F10        &kp F11
-               &trans      &none   &kp HOME     &kp UP    &kp END      &kp PG_UP                                              &kp KP_N7  &kp KP_N8   &kp KP_N9  &kp KP_MINUS     &kp KP_SLASH        &kp F12
-               &trans  &kp LC(Y)   &kp LEFT   &kp DOWN  &kp RIGHT      &kp PG_DN                                              &kp KP_N4  &kp KP_N5   &kp KP_N6   &kp KP_PLUS  &kp KP_MULTIPLY     &kp KP_NUM
- &magic LAY_mag 0  &kp LC(Z)  &kp LC(X)  &kp LC(C)  &kp LC(V)  &kp LS(LC(V))                                              &kp KP_N1  &kp KP_N2   &kp KP_N3  &kp KP_ENTER        &kp EQUAL &to LAY_def
-                                      &none     &trans     &trans                                                                        &kp KP_N0  &kp KP_DOT      &kp BSPC
-                                                             &mo LAY_nav  &trans  &trans              &trans  &trans  &kp KP_N0
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+                            &none   &none   &none                                                 &none   &none   &none
+                                                    &none  &none  &none     &none  &none  &none
+            >;
+        };
+
+        lay_os {
+            // OS keys.
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------------------    -------------------------------------------------
+            //             |     |     |     |     |     |     |    |     |     |     |     |     |     |
+            //             -------------------------------------    -------------------------------------
+            bindings = <
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+                            &none   &none   &none                                                 &none   &none   &none
+                                                    &none  &none  &none     &none  &none  &none
+            >;
+        };
+
+        lay_hk {
+            // Hotkeys.
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------                            -------------------------------------
+            // |     |     |     |     |     |     |                            |     |     |     |     |     |     |
+            // -------------------------------------------------    -------------------------------------------------
+            //             |     |     |     |     |     |     |    |     |     |     |     |     |     |
+            //             -------------------------------------    -------------------------------------
+            bindings = <
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+            &none   &none   &none   &none   &none   &none                                 &none   &none   &none   &none   &none   &none
+                            &none   &none   &none                                                 &none   &none   &none
+                                                    &none  &none  &none     &none  &none  &none
             >;
         };
 

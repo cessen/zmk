@@ -89,14 +89,14 @@ behaviors {
         bindings = <&kp SQT>, <&kp SQT>;
         mods = <(MOD_LSFT)>;
     };
-    
+
     minus: minus_non_shifting {
         compatible = "zmk,behavior-mod-morph";
         #binding-cells = <0>;
         bindings = <&kp MINUS>, <&kp MINUS>;
         mods = <(MOD_LSFT)>;
     };
-    
+
     slash: slash_non_shifting {
         compatible = "zmk,behavior-mod-morph";
         #binding-cells = <0>;
@@ -167,27 +167,27 @@ compatible = "zmk,keymap";
 
 default_layer {
     // A modified Engram layout.
-    // -----------------------------------------                                                                            ----------------------------------------
-    // |       |      |      | BRI_DN | BRI_UP |                                                                            | MUTE | VOL_DN | VOL_UP |      |      |
-    // ------------------------------------------------                                                              -----------------------------------------------
-    // |       |      |      |        |        |      |                                                              |      |      |        |        |      |      |
-    // ------------------------------------------------                                                              -----------------------------------------------
-    // | TAB   | Z    | Y    | O      | U      | /    |                                                              | ,    | L    | D      | W      | Q    | TAB  |
-    // ------------------------------------------------                                                              -----------------------------------------------
-    // | ESC   | C    | I    | E      | A      | '    |                                                              | B    | H    | T      | S      | N    | V    |
-    // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
-    // | TAB   | G    | X    | J      | K      | _    | | RET    | RET   | SUPER    |  | SUPER    | BSPC  | BSPC   | | .    | R    | M      | F      | P    | DEL  |
-    // ------------------------------------------------ -----------------------------  ----------------------------- -----------------------------------------------
-    // | MAGIC |      |      |        |        |        | SYM/HK | SHIFT | CTRL/ALT |  | CTRL/ALT | SPACE | NAV/OS |        |      |        |        |      |      |
-    // -----------------------------------------        -----------------------------  -----------------------------        ----------------------------------------
+    // -----------------------------------------                                                                           ----------------------------------------
+    // |       |      |      | BRI_DN | BRI_UP |                                                                           | MUTE | VOL_DN | VOL_UP |      |      |
+    // ------------------------------------------------                                                            -----------------------------------------------
+    // |       |      | SHIFT | CTRL  | ALT    | SUPER |                                                           | SUPER | ALT  | CTRL   | SHIFT  |      |      |
+    // ------------------------------------------------                                                            -----------------------------------------------
+    // | TAB   | Z    | Y    | O      | U      | /     |                                                           | ,     | L    | D      | W      | Q    | TAB  |
+    // ------------------------------------------------                                                            -----------------------------------------------
+    // | ESC   | C    | I    | E      | A      | '     |                                                           | B     | H    | T      | S      | N    | V    |
+    // ------------------------------------------------  -----------------------------  -------------------------- -----------------------------------------------
+    // | TAB   | G    | X    | J      | K      | _     | | RET    | RET   | SUPER    |  | SUPER | BSPC  | BSPC   | | .     | R    | M      | F      | P    | DEL  |
+    // ------------------------------------------------  -----------------------------  -------------------------- -----------------------------------------------
+    // | MAGIC |      |      |        |        |         | SYM/HK | SHIFT |          |  | BSPC  | SPACE | NAV/OS |         |      |        |        |      |      |
+    // -----------------------------------------         -----------------------------  --------------------------         ----------------------------------------
 
     bindings = <
-    &none           &none   &none   &kp C_BRI_DN  &kp C_BRI_UP                                                                                     &kp C_MUTE  &kp C_VOL_DN  &kp C_VOL_UP  &none   &none
-    &none           &none   &none   &none         &none         &none                                                                      &none   &none       &none         &none         &none   &none
-    &kp TAB         &kp Z   &kp Y   &kp O         &kp U         &slash                                                                     &comma  &kp L       &kp D         &kp W         &kp Q   &kp TAB
-    &kp ESC         &kp C   &kp I   &kp E         &kp A         &quote                                                                     &kp B   &kp H       &kp T         &kp S         &kp N   &kp V
-    &kp TAB         &kp G   &kp X   &kp J         &kp K         &kp UNDER  &kp RET  &kp RET   &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &dot    &kp R       &kp M         &kp F         &kp P   &kp DEL
-    &magic MAGIC 0  &none   &none   &none         &none                    &sym_hk  &shft_cw  &ctrl_alt   &ctrl_alt  &kp SPACE  &nav_os            &none       &none         &none         &none   &none
+    &none           &none   &none       &kp C_BRI_DN   &kp C_BRI_UP                                                                                          &kp C_MUTE   &kp C_VOL_DN   &kp C_VOL_UP   &none   &none
+    &none           &none   &kp LSHFT   &kp LCTRL      &kp LALT       &kp LGUI                                                                    &kp LGUI   &kp RALT     &kp RCTRL      &kp RSHFT      &none   &none
+    &kp TAB         &kp Z   &kp Y       &kp O          &kp U          &slash                                                                      &comma     &kp L        &kp D          &kp W          &kp Q   &kp TAB
+    &kp ESC         &kp C   &kp I       &kp E          &kp A          &quote                                                                      &kp B      &kp H        &kp T          &kp S          &kp N   &kp V
+    &kp TAB         &kp G   &kp X       &kp J          &kp K          &kp UNDER   &kp RET  &kp RET   &kp LGUI    &kp LGUI   &kp BSPC   &kp BSPC   &dot       &kp R        &kp M          &kp F          &kp P   &kp DEL
+    &magic MAGIC 0  &none   &none       &none          &none                      &sym_hk  &shft_cw  &none       &kp BSPC   &kp SPACE  &nav_os               &none        &none          &none          &none   &none
     >;
 };
 
@@ -209,7 +209,7 @@ navigation_layer {
 
     bindings = <
     &none    &none     &none     &none   &none                                                                             &none      &none     &none      &none  &none
-    &none    &none     &none     &none   &none      &none                                                       &none      &none      &none     &none      &none  &none
+    &none    &none     &trans    &trans  &trans     &trans                                                      &trans     &trans     &trans    &trans     &none  &none
     &none    &none     &kp ASTRK &slash  &kp CARET  &kp PRCNT                                                   &kp PG_UP  &kp HOME   &kp UP    &kp END    &none  &none
     &none    &kp COLON &kp PLUS  &minus  &kp EQUAL  &kp AMPS                                                    &kp PG_DN  &kp LEFT   &kp DOWN  &kp RIGHT  &none  &none
     &none    &kp TILDE &kp PIPE  &kp LT  &kp GT     &kp GRAVE &trans  &trans  &trans   &trans  &trans  &trans   &none      &none      &none     &none      &none  &none
@@ -235,7 +235,7 @@ numbers_layer {
 
     bindings = <
     &none  &none    &none      &none     &none                                                                           &none     &none     &none     &none     &none
-    &none  &none    &none      &none     &none     &none                                                       &none     &none     &none     &none     &none     &none
+    &none  &none    &trans     &trans    &trans    &trans                                                      &trans    &trans    &trans    &trans    &none     &none
     &none  &none    &kp N5     &kp N4    &kp N3    &none                                                       &kp DLLR  &kp HASH  &kp LBKT  &kp RBKT  &none     &none
     &none  &kp DOT  &kp N2     &kp N1    &kp N0    &kp N9                                                      &kp EXCL  &kp DQT   &kp LPAR  &kp RPAR  &kp SEMI  &none
     &none  &minus   &kp N8     &kp N7    &kp N6    &none    &trans  &trans  &trans   &trans  &trans  &trans    &kp QMARK &kp AT    &kp LBRC  &kp RBRC  &kp BSLH  &none
